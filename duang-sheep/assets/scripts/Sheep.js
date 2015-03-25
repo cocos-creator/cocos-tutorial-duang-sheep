@@ -3,6 +3,8 @@ var Sheep = Fire.extend(Fire.Component, function () {
     this.anim = null;
     //-- 当前速度
     this.currentSpeed = 0;
+    //-- 绵羊图片渲染
+    this.renderer = null;
     //-- 跳跃事件
     this.jumpEvent = null;
 });
@@ -49,6 +51,7 @@ Sheep.getset('state',
 
 Sheep.prototype.onLoad = function () {
     this.anim = this.getComponent(Fire.SpriteAnimation);
+    this.renderer = this.getComponent(Fire.SpriteRenderer);
 
     //-- 添加绵羊控制事件(为了注销事件缓存事件)
     this.jumpEvent = function (event) {
