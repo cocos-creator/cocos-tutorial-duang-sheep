@@ -13,7 +13,7 @@ PipeGroup.prop('minX', -900);
 PipeGroup.prop('topPosRange', new Fire.Vec2(100, 160));
 
 //-- 上方与下方管道的间距 Min 与 Max
-PipeGroup.prop('spacingRange', new Fire.Vec2(200, 210));
+PipeGroup.prop('spacingRange', new Fire.Vec2(210, 230));
 
 //-- 初始化
 PipeGroup.prototype.onEnable = function () {

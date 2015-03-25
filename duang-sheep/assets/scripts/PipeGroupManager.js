@@ -12,8 +12,14 @@ PipeGroupManager.prop('initPipeGroupPos', new Fire.Vec2(600, 0));
 //-- 创建PipeGroup需要的时间
 PipeGroupManager.prop('spawnInterval', 3);
 
+Object.defineProperty(PipeGroupManager.prototype, 'pipeGroupList', {
+    get: function () {
+        return this.entity.getChildren();
+    }
+});
+
 PipeGroupManager.prototype.onLoad = function () {
-    this.lastTime = 10;
+    this.lastTime = Fire.Time.time + 10;
 };
 
 //-- 创建管道组
@@ -22,6 +28,30 @@ PipeGroupManager.prototype.createPipeGroupEntity = function () {
     pipeGroup.parent = this.entity;
     pipeGroup.transform.position = this.initPipeGroupPos;
     pipeGroup.active = true;
+};
+
+PipeGroupManager.prototype.collisionDetection = function (sheepRect) {
+    for (var i = 0; i < this.pipeGroupList.length; ++i) {
+        //-- 上方障碍物
+        var pipeGroupEntity = this.pipeGroupList[i];
+        var pipe = pipeGroupEntity.find('topPipe');
+        var pipeRender = pipe.getComponent(Fire.SpriteRenderer)
+        var pipeRect = pipeRender.getWorldBounds();
+
+        if (Fire.Intersection.rectRect(sheepRect, pipeRect)) {
+            return true;
+        }
+
+        //-- 下方障碍物
+        pipe = pipeGroupEntity.find('bottomPipe');
+        pipeRender = pipe.getComponent(Fire.SpriteRenderer);
+        pipeRect = pipeRender.getWorldBounds();
+
+        if (Fire.Intersection.rectRect(sheepRect, pipeRect)) {
+            return true;
+        }
+    }
+    return false;
 };
 
 //-- 更新
