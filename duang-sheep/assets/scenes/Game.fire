@@ -22,6 +22,9 @@
         "__id__": 30
       },
       {
+        "__id__": 39
+      },
+      {
         "__id__": 20
       }
     ],
@@ -140,7 +143,7 @@
       "b": 0,
       "a": 1
     },
-    "_size": 3573.2274223729987,
+    "_size": 677,
     "_contentStrategy": 1
   },
   {
@@ -800,5 +803,116 @@
     "_enabled": true,
     "speed": 200,
     "offsetX": 864
+  },
+  {
+    "__type__": "Fire.Entity",
+    "_name": "Sheep",
+    "_objFlags": 0,
+    "_active": true,
+    "_parent": null,
+    "_children": [],
+    "_components": [
+      {
+        "__id__": 40
+      },
+      {
+        "__id__": 41
+      },
+      {
+        "__id__": 42
+      },
+      {
+        "__id__": 43
+      }
+    ],
+    "transform": {
+      "__id__": 40
+    }
+  },
+  {
+    "__type__": "Fire.Transform",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 39
+    },
+    "_enabled": true,
+    "_position": {
+      "__type__": "Fire.Vec2",
+      "x": -150,
+      "y": -170
+    },
+    "_rotation": 0,
+    "_scale": {
+      "__type__": "Fire.Vec2",
+      "x": -1,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "Fire.SpriteRenderer",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 39
+    },
+    "_enabled": true,
+    "_sprite": {
+      "__uuid__": "04ba1a52-4cf7-4d97-9a97-4c932a25783c"
+    },
+    "_color": {
+      "__type__": "Fire.Color",
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+    },
+    "customSize_": true,
+    "width_": 114,
+    "height_": 79
+  },
+  {
+    "__type__": "Fire.SpriteAnimation",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 39
+    },
+    "_enabled": true,
+    "defaultAnimation": {
+      "__uuid__": "e220dc02-40f0-406f-8c9c-a95032974ffd"
+    },
+    "animations": [
+      {
+        "__uuid__": "e220dc02-40f0-406f-8c9c-a95032974ffd"
+      },
+      {
+        "__uuid__": "f57b2288-c7fc-4c10-8be3-1cee9a1283fc"
+      },
+      {
+        "__uuid__": "86c1cb93-74ca-4248-beb6-25112246e68f"
+      },
+      {
+        "__uuid__": "e269bda7-becb-47fa-a8ac-07eed6c3cf75"
+      },
+      {
+        "__uuid__": "40419e07-1d40-4683-b4c0-4c27fe6dc1ce"
+      }
+    ],
+    "_playAutomatically": true
+  },
+  {
+    "__type__": "084b8u92G1Am6u3hdBZ3eAh",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 39
+    },
+    "_enabled": true,
+    "maxY": 250,
+    "groundY": -170,
+    "gravity": 9.8,
+    "initSpeed": 500,
+    "_state": 1
   }
 ]
