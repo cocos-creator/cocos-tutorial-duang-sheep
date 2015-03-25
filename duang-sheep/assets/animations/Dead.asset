@@ -1,0 +1,18 @@
+{
+  "__type__": "Fire.SpriteAnimationClip",
+  "_name": "",
+  "_objFlags": 0,
+  "wrapMode": 0,
+  "stopAction": 0,
+  "speed": 1,
+  "_frameRate": 60,
+  "frameInfos": [
+    {
+      "__type__": "FrameInfo",
+      "sprite": {
+        "__uuid__": "5ed784df-6795-413b-bcb0-0cae63918221"
+      },
+      "frames": 5
+    }
+  ]
+}
