@@ -1,6 +1,8 @@
 var PipeGroup = Fire.extend(Fire.Component, function () {
-    //-- 管道的宽度
-    this.width = 0;
+    //-- 保存下方管道的Renderer,方便获得水平边界
+    this.bottomRenderer = null;
+    //-- 是否已经被通过
+    this.passed = false;
 });
 
 //-- 基础移动速度
@@ -27,8 +29,8 @@ PipeGroup.prototype.onEnable = function () {
     var bottomEntity = this.entity.find('bottomPipe');
     bottomEntity.transform.y = bottomYpos;
 
-    var bottomPipeRenderer = bottomEntity.getComponent(Fire.SpriteRenderer);
-    this.width = bottomPipeRenderer.sprite.width;
+    this.bottomRenderer = bottomEntity.getComponent(Fire.SpriteRenderer);
+    this.passed = false;
 };
 
 //-- 刷新

@@ -2,5 +2,7 @@
   "__type__": "Fire.BitmapFontMeta",
   "ver": 0,
   "uuid": "89ddf309-1d6c-4eed-9d24-404ea2abc960",
-  "texture": null
+  "texture": {
+    "__uuid__": "10f350a8-a001-4256-bd33-aa817089ea4a"
+  }
 }
