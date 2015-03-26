@@ -1,3 +1,4 @@
+
 var Sheep = Fire.extend(Fire.Component, function () {
     //-- 当前播放动画组件
     this.anim = null;
@@ -71,6 +72,9 @@ Sheep.prototype.onDestroy = function () {
 Sheep.prototype.jump = function () {
     this.state = Sheep.State.Jump;
     this.currentSpeed = this.initSpeed;
+
+    var GameManager = require('GameManager');
+    GameManager.instance.jumpAudio.play();
 };
 
 //-- 更新绵羊状态

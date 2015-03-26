@@ -33,6 +33,9 @@
       },
       {
         "__id__": 60
+      },
+      {
+        "__id__": 65
       }
     ],
     "camera": {
@@ -986,6 +989,21 @@
     },
     "scoreText": {
       "__id__": 59
+    },
+    "gameBgAudio": {
+      "__id__": 62
+    },
+    "dieAudio": {
+      "__id__": 69
+    },
+    "gameOverAudio": {
+      "__id__": 78
+    },
+    "jumpAudio": {
+      "__id__": 75
+    },
+    "scoreAudio": {
+      "__id__": 72
     }
   },
   {
@@ -1292,5 +1310,347 @@
       "x": 1,
       "y": 1
     }
+  },
+  {
+    "__type__": "Fire.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 63
+    },
+    "_enabled": true,
+    "_playbackRate": 1,
+    "_clip": {
+      "__uuid__": "c7593d96-69f7-4b78-b5bc-cfc4cdc1244c"
+    },
+    "_loop": true,
+    "_mute": false,
+    "_volume": 1,
+    "playOnAwake": true
+  },
+  {
+    "__type__": "Fire.Entity",
+    "_name": "gameBg",
+    "_objFlags": 0,
+    "transform": {
+      "__id__": 64
+    },
+    "_active": true,
+    "_parent": {
+      "__id__": 65
+    },
+    "_children": [],
+    "_components": [
+      {
+        "__id__": 64
+      },
+      {
+        "__id__": 62
+      }
+    ]
+  },
+  {
+    "__type__": "Fire.Transform",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 63
+    },
+    "_enabled": true,
+    "_position": {
+      "__type__": "Fire.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_rotation": 0,
+    "_scale": {
+      "__type__": "Fire.Vec2",
+      "x": 1,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "Fire.Entity",
+    "_name": "Audios",
+    "_objFlags": 0,
+    "transform": {
+      "__id__": 66
+    },
+    "_active": true,
+    "_parent": null,
+    "_children": [
+      {
+        "__id__": 67
+      },
+      {
+        "__id__": 63
+      },
+      {
+        "__id__": 70
+      },
+      {
+        "__id__": 73
+      },
+      {
+        "__id__": 76
+      }
+    ],
+    "_components": [
+      {
+        "__id__": 66
+      }
+    ]
+  },
+  {
+    "__type__": "Fire.Transform",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 65
+    },
+    "_enabled": true,
+    "_position": {
+      "__type__": "Fire.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_rotation": 0,
+    "_scale": {
+      "__type__": "Fire.Vec2",
+      "x": 1,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "Fire.Entity",
+    "_name": "die",
+    "_objFlags": 0,
+    "transform": {
+      "__id__": 68
+    },
+    "_active": true,
+    "_parent": {
+      "__id__": 65
+    },
+    "_children": [],
+    "_components": [
+      {
+        "__id__": 68
+      },
+      {
+        "__id__": 69
+      }
+    ]
+  },
+  {
+    "__type__": "Fire.Transform",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 67
+    },
+    "_enabled": true,
+    "_position": {
+      "__type__": "Fire.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_rotation": 0,
+    "_scale": {
+      "__type__": "Fire.Vec2",
+      "x": 1,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "Fire.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 67
+    },
+    "_enabled": true,
+    "_playbackRate": 1,
+    "_clip": {
+      "__uuid__": "e6a8890b-f4e1-4f7d-9a4c-5ede6070f762"
+    },
+    "_loop": false,
+    "_mute": false,
+    "_volume": 1,
+    "playOnAwake": false
+  },
+  {
+    "__type__": "Fire.Entity",
+    "_name": "score",
+    "_objFlags": 0,
+    "transform": {
+      "__id__": 71
+    },
+    "_active": true,
+    "_parent": {
+      "__id__": 65
+    },
+    "_children": [],
+    "_components": [
+      {
+        "__id__": 71
+      },
+      {
+        "__id__": 72
+      }
+    ]
+  },
+  {
+    "__type__": "Fire.Transform",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 70
+    },
+    "_enabled": true,
+    "_position": {
+      "__type__": "Fire.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_rotation": 0,
+    "_scale": {
+      "__type__": "Fire.Vec2",
+      "x": 1,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "Fire.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 70
+    },
+    "_enabled": true,
+    "_playbackRate": 1,
+    "_clip": {
+      "__uuid__": "5486221f-527b-4def-a800-c68239f0e596"
+    },
+    "_loop": false,
+    "_mute": false,
+    "_volume": 1,
+    "playOnAwake": false
+  },
+  {
+    "__type__": "Fire.Entity",
+    "_name": "jump",
+    "_objFlags": 0,
+    "transform": {
+      "__id__": 74
+    },
+    "_active": true,
+    "_parent": {
+      "__id__": 65
+    },
+    "_children": [],
+    "_components": [
+      {
+        "__id__": 74
+      },
+      {
+        "__id__": 75
+      }
+    ]
+  },
+  {
+    "__type__": "Fire.Transform",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 73
+    },
+    "_enabled": true,
+    "_position": {
+      "__type__": "Fire.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_rotation": 0,
+    "_scale": {
+      "__type__": "Fire.Vec2",
+      "x": 1,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "Fire.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 73
+    },
+    "_enabled": true,
+    "_playbackRate": 1,
+    "_clip": {
+      "__uuid__": "291f0992-245f-4261-9857-c967c3883aa9"
+    },
+    "_loop": false,
+    "_mute": false,
+    "_volume": 1,
+    "playOnAwake": false
+  },
+  {
+    "__type__": "Fire.Entity",
+    "_name": "gameOver",
+    "_objFlags": 0,
+    "transform": {
+      "__id__": 77
+    },
+    "_active": true,
+    "_parent": {
+      "__id__": 65
+    },
+    "_children": [],
+    "_components": [
+      {
+        "__id__": 77
+      },
+      {
+        "__id__": 78
+      }
+    ]
+  },
+  {
+    "__type__": "Fire.Transform",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 76
+    },
+    "_enabled": true,
+    "_position": {
+      "__type__": "Fire.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_rotation": 0,
+    "_scale": {
+      "__type__": "Fire.Vec2",
+      "x": 1,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "Fire.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "entity": {
+      "__id__": 76
+    },
+    "_enabled": true,
+    "_playbackRate": 1,
+    "_clip": {
+      "__uuid__": "088a30e3-0e85-4ccb-9bc0-08ffa17a85fd"
+    },
+    "_loop": false,
+    "_mute": false,
+    "_volume": 1,
+    "playOnAwake": false
   }
 ]

@@ -10,7 +10,10 @@ var GameState = Fire.defineEnum({
 var GameManager = Fire.extend(Fire.Component, function () {
     this.gameState = GameState.Run;
     this.score = 0;
+    GameManager.instance = this;
 });
+
+GameManager.instance = null;
 
 GameManager.prop('sheep', null, Fire.ObjectType(Sheep));
 
@@ -24,6 +27,16 @@ GameManager.prop('gameOverMenu', null, Fire.ObjectType(Fire.Entity));
 
 GameManager.prop('scoreText', null, Fire.ObjectType(Fire.BitmapText));
 
+GameManager.prop('gameBgAudio', null, Fire.ObjectType(Fire.AudioSource));
+
+GameManager.prop('dieAudio', null, Fire.ObjectType(Fire.AudioSource));
+
+GameManager.prop('gameOverAudio', null, Fire.ObjectType(Fire.AudioSource));
+
+GameManager.prop('jumpAudio', null, Fire.ObjectType(Fire.AudioSource));
+
+GameManager.prop('scoreAudio', null, Fire.ObjectType(Fire.AudioSource));
+
 GameManager.prototype.onStart = function () {
     this.gameState = GameState.Run;
     this.score = 0;
@@ -36,6 +49,11 @@ GameManager.prototype.update = function () {
             var sheepRect = this.sheep.renderer.getWorldBounds();
             var gameOver = this.pipeGroupMgr.collisionDetection(sheepRect);
             if (gameOver) {
+                //-- 背景音效停止，死亡音效播放
+                this.gameBgAudio.stop();
+                this.dieAudio.play();
+                this.gameOverAudio.play();
+
                 this.gameState = GameState.Over;
                 this.sheep.state = Sheep.State.Dead;
                 this.ground.enabled = false;
@@ -68,6 +86,8 @@ GameManager.prototype.updateSorce = function () {
             this.score++;
             this.scoreText.text = this.score;
             this.pipeGroupMgr.setAsPassed(nextPipeGroup);
+            //-- 分数增加音效
+            this.scoreAudio.play();
         }
     }
 };
