@@ -31,6 +31,9 @@ Sheep.prop('gravity', 9.8);
 //-- 起跳速度
 Sheep.prop('initSpeed', 500);
 
+//-- Jump 音效
+Sheep.prop('jumpAudio', null, Fire.ObjectType(Fire.AudioSource));
+
 //-- 起跳速度
 Sheep.prop('_state', Sheep.State.Run, Fire.Enum(Sheep.State), Fire.HideInInspector);
 Sheep.getset('state',
@@ -71,6 +74,9 @@ Sheep.prototype.onDestroy = function () {
 Sheep.prototype.jump = function () {
     this.state = Sheep.State.Jump;
     this.currentSpeed = this.initSpeed;
+
+    this.jumpAudio.stop();
+    this.jumpAudio.play();
 };
 
 //-- 更新绵羊状态
