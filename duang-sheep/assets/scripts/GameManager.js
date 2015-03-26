@@ -9,6 +9,7 @@ var GameState = Fire.defineEnum({
 
 var GameManager = Fire.extend(Fire.Component, function () {
     this.gameState = GameState.Run;
+    this.score = 0;
 });
 
 GameManager.prop('sheep', null, Fire.ObjectType(Sheep));
@@ -21,8 +22,12 @@ GameManager.prop('pipeGroupMgr', null, Fire.ObjectType(PipeGroupManager));
 
 GameManager.prop('gameOverMenu', null, Fire.ObjectType(Fire.Entity));
 
+GameManager.prop('scoreText', null, Fire.ObjectType(Fire.BitmapText));
+
 GameManager.prototype.onStart = function () {
     this.gameState = GameState.Run;
+    this.score = 0;
+    this.scoreText.text = this.score;
 };
 
 GameManager.prototype.update = function () {
@@ -42,8 +47,27 @@ GameManager.prototype.update = function () {
                 this.pipeGroupMgr.enabled = false;
                 this.gameOverMenu.active = true;
             }
+            //-- 计算分数
+            this.updateSorce();
             break;
         default :
             break;
+    }
+};
+
+GameManager.prototype.updateSorce = function () {
+    var nextPipeGroup = this.pipeGroupMgr.getNext();
+    if (nextPipeGroup) {
+        var sheepRect = this.sheep.renderer.getWorldBounds();
+        var pipeGroupRect = nextPipeGroup.bottomRenderer.getWorldBounds();
+
+        //-- 当绵羊的右边坐标越过水管右侧坐标
+        var crossed = sheepRect.xMin > pipeGroupRect.xMax;
+        if (crossed) {
+            //-- 分数+1
+            this.score++;
+            this.scoreText.text = this.score;
+            this.pipeGroupMgr.setAsPassed(nextPipeGroup);
+        }
     }
 };
