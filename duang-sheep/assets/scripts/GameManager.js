@@ -14,6 +14,8 @@ var GameManager = Fire.Class({
     constructor: function () {
         //-- 游戏状态
         this.gameState = GameState.Run
+        //-- 分数
+        this.score = 0;
     },
     //-- 属性
     properties: {
@@ -41,11 +43,18 @@ var GameManager = Fire.Class({
         gameOverMenu: {
             default: null,
             type: Fire.Entity
+        },
+        //-- 获取分数对象
+        scoreText: {
+            default: null,
+            type: Fire.BitmapText
         }
     },
     //-- 开始
     onStart: function () {
         this.gameState = GameState.Run;
+        this.score = 0;
+        this.scoreText.text = this.score;
     },
     //-- 更新
     update: function () {
@@ -65,9 +74,27 @@ var GameManager = Fire.Class({
                     this.pipeGroupMgr.enabled = false;
                     this.gameOverMenu.active = true;
                 }
+                //-- 计算分数
+                this.updateSorce();
                 break;
             default :
                 break;
+        }
+    },
+    //-- 更新分数
+    updateSorce: function () {
+        var nextPipeGroup = this.pipeGroupMgr.getNext();
+        if (nextPipeGroup) {
+            var sheepRect = this.sheep.renderer.getWorldBounds();
+            var pipeGroupRect = nextPipeGroup.bottomRenderer.getWorldBounds();
+            //-- 当绵羊的右边坐标越过水管右侧坐标
+            var crossed = sheepRect.xMin > pipeGroupRect.xMax;
+            if (crossed) {
+                //-- 分数+1
+                this.score++;
+                this.scoreText.text = this.score;
+                this.pipeGroupMgr.setAsPassed(nextPipeGroup);
+            }
         }
     }
 });

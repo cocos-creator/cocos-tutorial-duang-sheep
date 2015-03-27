@@ -38,6 +38,21 @@ var PipeGroupManager = Fire.Class({
         pipeGroup.transform.position = this.initPipeGroupPos;
         pipeGroup.active = true;
     },
+    //-- 获取下个未通过的水管
+    getNext: function () {
+        for (var i = 0; i < this.pipeGroupList.length; ++i) {
+            var pipeGroupEntity = this.pipeGroupList[i];
+            var pipeGroup = pipeGroupEntity.getComponent('PipeGroup');
+            if (!pipeGroup.passed) {
+                return pipeGroup;
+            }
+        }
+        return null;
+    },
+    //-- 标记已通过的水管
+    setAsPassed: function (pipeGroup) {
+        pipeGroup.passed = true;
+    },
     //-- 碰撞检测
     collisionDetection: function (sheepRect) {
         for (var i = 0; i < this.pipeGroupList.length; ++i) {

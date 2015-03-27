@@ -3,8 +3,10 @@ var PipeGroup = Fire.Class({
     extends: Fire.Component,
     //-- 构造函数
     constructor: function () {
-        //-- 管道的宽度
-        this.width = 0;
+        //-- 保存下方管道的Renderer,方便获得水平边界
+        this.bottomRenderer = null;
+        //-- 是否已经被通过
+        this.passed = false;
     },
     //-- 属性
     properties: {
@@ -33,8 +35,8 @@ var PipeGroup = Fire.Class({
         var bottomEntity = this.entity.find('bottomPipe');
         bottomEntity.transform.y = bottomYpos;
 
-        var bottomPipeRenderer = bottomEntity.getComponent(Fire.SpriteRenderer);
-        this.width = bottomPipeRenderer.sprite.width;
+        this.bottomRenderer = bottomEntity.getComponent(Fire.SpriteRenderer);
+        this.passed = false;
     },
     //-- 更新
     update: function () {
