@@ -50,7 +50,8 @@ var Sheep = Fire.Class({
                         this.anim.play(animName);
                     }
                 }
-            }
+            },
+            type: State
         },
         //-- 获取Jump音效
         jumpAudio: {
