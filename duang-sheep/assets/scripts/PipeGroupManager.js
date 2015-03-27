@@ -4,7 +4,7 @@ var PipeGroupManager = Fire.Class({
     //-- 构造函数
     constructor: function () {
         //-- 上一次创建PipeGroup的时间
-        lastTime: 0
+        this.lastTime = 0;
     },
     //-- 属性
     properties: {
