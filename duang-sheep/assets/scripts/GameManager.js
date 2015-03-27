@@ -7,82 +7,94 @@ var GameState = Fire.defineEnum({
     Over: -1
 });
 
-var GameManager = Fire.extend(Fire.Component, function () {
-    this.gameState = GameState.Run;
-    this.score = 0;
-});
-
-GameManager.prop('sheep', null, Fire.ObjectType(Sheep));
-
-GameManager.prop('background', null, Fire.ObjectType(ScrollPicture));
-
-GameManager.prop('ground', null, Fire.ObjectType(ScrollPicture));
-
-GameManager.prop('pipeGroupMgr', null, Fire.ObjectType(PipeGroupManager));
-
-GameManager.prop('gameOverMenu', null, Fire.ObjectType(Fire.Entity));
-
-GameManager.prop('scoreText', null, Fire.ObjectType(Fire.BitmapText));
-
-GameManager.prop('gameBgAudio', null, Fire.ObjectType(Fire.AudioSource));
-
-GameManager.prop('dieAudio', null, Fire.ObjectType(Fire.AudioSource));
-
-GameManager.prop('gameOverAudio', null, Fire.ObjectType(Fire.AudioSource));
-
-GameManager.prop('scoreAudio', null, Fire.ObjectType(Fire.AudioSource));
-
-GameManager.prototype.onStart = function () {
-    this.gameState = GameState.Run;
-    this.score = 0;
-    this.scoreText.text = this.score;
-};
-
-GameManager.prototype.update = function () {
-    switch (this.gameState) {
-        case GameState.Run:
-            var sheepRect = this.sheep.renderer.getWorldBounds();
-            var gameOver = this.pipeGroupMgr.collisionDetection(sheepRect);
-            if (gameOver) {
-                //-- 背景音效停止，死亡音效播放
-                this.gameBgAudio.stop();
-                this.dieAudio.play();
-                this.gameOverAudio.play();
-
-                this.gameState = GameState.Over;
-                this.sheep.state = Sheep.State.Dead;
-                this.ground.enabled = false;
-                this.background.enabled = false;
-                for (var i = 0; i < this.pipeGroupMgr.pipeGroupList.length; ++i) {
-                    var pipeGroup = this.pipeGroupMgr.pipeGroupList[i].getComponent('PipeGroup');
-                    pipeGroup.enabled = false;
+var GameManager = Fire.Class({
+    //-- 继承
+    extends: Fire.Component,
+    //-- 构造函数
+    constructor: function () {
+        //-- 游戏状态
+        this.gameState = GameState.Run
+        //-- 分数
+        this.score = 0;
+    },
+    //-- 属性
+    properties: {
+        //-- 获取绵羊
+        sheep: {
+            default: null,
+            type: Sheep
+        },
+        //-- 获取背景
+        background: {
+            default: null,
+            type: ScrollPicture
+        },
+        //-- 获取地面
+        ground: {
+            default: null,
+            type: ScrollPicture
+        },
+        //-- 获取障碍物管理
+        pipeGroupMgr: {
+            default: null,
+            type: PipeGroupManager
+        },
+        //-- 获取gameOverMenu对象
+        gameOverMenu: {
+            default: null,
+            type: Fire.Entity
+        },
+        //-- 获取分数对象
+        scoreText: {
+            default: null,
+            type: Fire.BitmapText
+        }
+    },
+    //-- 开始
+    onStart: function () {
+        this.gameState = GameState.Run;
+        this.score = 0;
+        this.scoreText.text = this.score;
+    },
+    //-- 更新
+    update: function () {
+        switch (this.gameState) {
+            case GameState.Run:
+                var sheepRect = this.sheep.renderer.getWorldBounds();
+                var gameOver = this.pipeGroupMgr.collisionDetection(sheepRect);
+                if (gameOver) {
+                    this.gameState = GameState.Over;
+                    this.sheep.state = Sheep.State.Dead;
+                    this.ground.enabled = false;
+                    this.background.enabled = false;
+                    for (var i = 0; i < this.pipeGroupMgr.pipeGroupList.length; ++i) {
+                        var pipeGroup = this.pipeGroupMgr.pipeGroupList[i].getComponent('PipeGroup');
+                        pipeGroup.enabled = false;
+                    }
+                    this.pipeGroupMgr.enabled = false;
+                    this.gameOverMenu.active = true;
                 }
-                this.pipeGroupMgr.enabled = false;
-                this.gameOverMenu.active = true;
+                //-- 计算分数
+                this.updateSorce();
+                break;
+            default :
+                break;
+        }
+    },
+    //-- 更新分数
+    updateSorce: function () {
+        var nextPipeGroup = this.pipeGroupMgr.getNext();
+        if (nextPipeGroup) {
+            var sheepRect = this.sheep.renderer.getWorldBounds();
+            var pipeGroupRect = nextPipeGroup.bottomRenderer.getWorldBounds();
+            //-- 当绵羊的右边坐标越过水管右侧坐标
+            var crossed = sheepRect.xMin > pipeGroupRect.xMax;
+            if (crossed) {
+                //-- 分数+1
+                this.score++;
+                this.scoreText.text = this.score;
+                this.pipeGroupMgr.setAsPassed(nextPipeGroup);
             }
-            //-- 计算分数
-            this.updateSorce();
-            break;
-        default :
-            break;
-    }
-};
-
-GameManager.prototype.updateSorce = function () {
-    var nextPipeGroup = this.pipeGroupMgr.getNext();
-    if (nextPipeGroup) {
-        var sheepRect = this.sheep.renderer.getWorldBounds();
-        var pipeGroupRect = nextPipeGroup.bottomRenderer.getWorldBounds();
-
-        //-- 当绵羊的右边坐标越过水管右侧坐标
-        var crossed = sheepRect.xMin > pipeGroupRect.xMax;
-        if (crossed) {
-            //-- 分数+1
-            this.score++;
-            this.scoreText.text = this.score;
-            this.pipeGroupMgr.setAsPassed(nextPipeGroup);
-            //-- 分数增加音效
-            this.scoreAudio.play();
         }
     }
-};
+});
