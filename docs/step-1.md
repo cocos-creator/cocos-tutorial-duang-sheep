@@ -13,6 +13,17 @@
 ## 准备阶段：
 - 拉取Git路径中的基础项目.
 - 在通过 Fireball引擎 打开已下好基础项目(里面包含需要用到的所有资源).
+- 设置摄像机属性。
+- 设置窗口分辨率
+- 通过ctrl + s 保存场景到scenes文件夹中,取名为Game
 
-最终示例图：
-![001](https://cloud.githubusercontent.com/assets/7564028/6773306/877b7882-d14a-11e4-8079-25638a512e14.png)
+**摄像机属性图:**
+
+   ![000](https://cloud.githubusercontent.com/assets/7564028/6840260/cb6f9516-d3af-11e4-8729-b842307c1aed.png)
+
+**窗口分辨率图:**
+
+   ![001](https://cloud.githubusercontent.com/assets/7564028/6840252/99f88740-d3af-11e4-86fe-de173f1011ed.png)
+
+**最终示例图:**
+   ![002](https://cloud.githubusercontent.com/assets/7564028/6840325/dbb2a1b0-d3b0-11e4-8e10-efdd04f93bc7.png)
