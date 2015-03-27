@@ -48,6 +48,26 @@ var GameManager = Fire.Class({
         scoreText: {
             default: null,
             type: Fire.BitmapText
+        },
+        //-- 获取背景音效
+        gameBgAudio: {
+            default: null,
+            type: Fire.AudioSource
+        },
+        //-- 获取死亡音效
+        dieAudio: {
+            default: null,
+            type: Fire.AudioSource
+        },
+        //-- 获取失败音效
+        gameOverAudio: {
+            default: null,
+            type: Fire.AudioSource
+        },
+        //-- 获取得分音效
+        scoreAudio: {
+            default: null,
+            type: Fire.AudioSource
         }
     },
     //-- 开始
@@ -63,6 +83,11 @@ var GameManager = Fire.Class({
                 var sheepRect = this.sheep.renderer.getWorldBounds();
                 var gameOver = this.pipeGroupMgr.collisionDetection(sheepRect);
                 if (gameOver) {
+                    //-- 背景音效停止，死亡音效播放
+                    this.gameBgAudio.stop();
+                    this.dieAudio.play();
+                    this.gameOverAudio.play();
+
                     this.gameState = GameState.Over;
                     this.sheep.state = Sheep.State.Dead;
                     this.ground.enabled = false;
@@ -94,6 +119,8 @@ var GameManager = Fire.Class({
                 this.score++;
                 this.scoreText.text = this.score;
                 this.pipeGroupMgr.setAsPassed(nextPipeGroup);
+                //-- 分数增加音效
+                this.scoreAudio.play();
             }
         }
     }

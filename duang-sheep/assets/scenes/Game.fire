@@ -923,10 +923,10 @@
     "groundY": -170,
     "gravity": 9.8,
     "initSpeed": 500,
+    "_state": 1,
     "jumpAudio": {
       "__id__": 44
-    },
-    "_state": 1
+    }
   },
   {
     "__type__": "Fire.AudioSource",

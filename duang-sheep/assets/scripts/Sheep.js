@@ -51,6 +51,11 @@ var Sheep = Fire.Class({
                     }
                 }
             }
+        },
+        //-- 获取Jump音效
+        jumpAudio: {
+            default: null,
+            type: Fire.AudioSource
         }
     },
     //-- 初始化
@@ -111,6 +116,10 @@ var Sheep = Fire.Class({
     _jump: function () {
         this.state = State.Jump;
         this.currentSpeed = this.initSpeed;
+
+        //-- 播放跳音效
+        this.jumpAudio.stop();
+        this.jumpAudio.play();
     }
 });
 
