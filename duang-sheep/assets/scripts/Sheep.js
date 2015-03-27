@@ -48,7 +48,8 @@ var Sheep = Fire.Class({
                         this.anim.play(animName);
                     }
                 }
-            }
+            },
+            type: State
         }
     },
     //-- 初始化
