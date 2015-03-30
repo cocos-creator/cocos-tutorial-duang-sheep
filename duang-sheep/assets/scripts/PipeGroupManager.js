@@ -24,7 +24,7 @@ var PipeGroupManager = Fire.Class({
             get: function () {
                 return this.entity.getChildren();
             },
-            hideInInspector: true
+            visible: false
         }
     },
     //-- 初始化
