@@ -36,7 +36,7 @@ var Sheep = Fire.Class({
         _state: {
             default: State.Run,
             type: State,
-            hideInInspector: true
+            visible: false
         },
         state: {
             get: function () {
