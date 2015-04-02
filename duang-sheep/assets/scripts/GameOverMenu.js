@@ -14,12 +14,13 @@ var GameOverMenu = Fire.Class({
             type: Fire.Entity
         }
     },
-    //-- 开始
+    // 加载Game场景(重新开始游戏)
+    resetGameEvent: function () {
+        Fire.Engine.loadScene('Game');
+    },
+    // 开始
     onStart: function () {
-        //-- 注册重新开始事件
-        this.resetGameEvent = function (event) {
-            Fire.Engine.loadScene('Game');
-        }.bind(this);
+        // 注册重新开始事件
         this.btn_play.on('mousedown', this.resetGameEvent);
     },
     //-- 删除
