@@ -4,7 +4,7 @@ var GameOverMenu = Fire.Class({
     //-- 构造函数
     constructor: function () {
         //-- 重新开始事件
-        this.resetGameEvent = null;
+        this.resetGameEvent;
     },
     //-- 属性
     properties: {
