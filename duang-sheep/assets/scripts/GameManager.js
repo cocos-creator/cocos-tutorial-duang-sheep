@@ -71,7 +71,7 @@ var GameManager = Fire.Class({
         }
     },
     //-- 开始
-    onStart: function () {
+    start: function () {
         this.gameState = GameState.Run;
         this.score = 0;
         this.scoreText.text = this.score;
