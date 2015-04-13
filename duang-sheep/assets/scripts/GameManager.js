@@ -44,7 +44,7 @@ var GameManager = Fire.Class({
         }
     },
     //-- 开始
-    onStart: function () {
+    start: function () {
         this.gameState = GameState.Run;
     },
     //-- 更新
