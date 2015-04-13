@@ -19,7 +19,7 @@ var GameOverMenu = Fire.Class({
         Fire.Engine.loadScene('Game');
     },
     // 开始
-    onStart: function () {
+    start: function () {
         // 注册重新开始事件
         this.btn_play.on('mousedown', this.resetGameEvent);
     },
