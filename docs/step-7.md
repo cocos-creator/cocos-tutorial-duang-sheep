@@ -113,7 +113,7 @@
               }
           },
           // 开始
-          onStart: function () {..... },
+          start: function () {..... },
           // 更新
           update: function () {
               switch (this.gameState) {

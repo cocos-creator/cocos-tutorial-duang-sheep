@@ -113,7 +113,7 @@
             }
         },
         // 开始
-        onStart: function () {
+        start: function () {
             .....
             this.score = 0;
             this.scoreText.text = this.score;
