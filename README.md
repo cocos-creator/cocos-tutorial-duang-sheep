@@ -10,12 +10,10 @@ Use the following resources to learn more:
 
 ## Get Started
 
-Start with [base-project](https://github.com/fireball-x/tutorial/tree/base-project/duang-sheep)
+Get base project with all resources from  [base-project](https://github.com/fireball-x/tutorial/archive/base-project.zip)
 
 Follow steps in [docs](https://github.com/fireball-x/tutorial/tree/master/docs)
 
-And finished game will be [complete-project](https://github.com/fireball-x/tutorial/tree/complete-project)
+And finished game will be in `duang-sheep` folder of this package.
 
 Enjoy!
-
-
