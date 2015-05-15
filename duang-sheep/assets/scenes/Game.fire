@@ -148,12 +148,12 @@
     "_enabled": true,
     "_background": {
       "__type__": "Fire.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 0.18823529411764706,
+      "g": 0.18823529411764706,
+      "b": 0.18823529411764706,
       "a": 1
     },
-    "_size": 677,
+    "_size": 434,
     "_contentStrategy": 1
   },
   {
@@ -261,7 +261,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 900,
     "height_": 504
   },
@@ -324,7 +324,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 900,
     "height_": 504
   },
@@ -543,7 +543,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 148,
     "height_": 1024
   },
@@ -606,7 +606,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 148,
     "height_": 1024
   },
@@ -736,7 +736,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 900,
     "height_": 96
   },
@@ -799,7 +799,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 900,
     "height_": 96
   },
@@ -855,8 +855,8 @@
     "_rotation": 0,
     "_scale": {
       "__type__": "Fire.Vec2",
-      "x": -1,
-      "y": 1
+      "x": -0.7,
+      "y": 0.7
     }
   },
   {
@@ -877,7 +877,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": true,
+    "_useCustomSize": false,
     "width_": 114,
     "height_": 79
   },
@@ -936,14 +936,14 @@
       "__id__": 45
     },
     "_enabled": true,
-    "_playbackRate": 1,
     "_clip": {
-      "__uuid__": "291f0992-245f-4261-9857-c967c3883aa9"
+      "__uuid__": "db86c8db-61db-4738-9bd6-f9d493cb79a8"
     },
     "_loop": false,
     "_mute": false,
     "_volume": 1,
-    "playOnAwake": false
+    "_playbackRate": 1,
+    "playOnLoad": false
   },
   {
     "__type__": "Fire.Entity",
@@ -1006,10 +1006,10 @@
         "__id__": 55
       },
       {
-        "__id__": 45
+        "__id__": 58
       },
       {
-        "__id__": 58
+        "__id__": 45
       }
     ],
     "_components": [
@@ -1087,14 +1087,14 @@
       "__id__": 49
     },
     "_enabled": true,
-    "_playbackRate": 1,
     "_clip": {
       "__uuid__": "e6a8890b-f4e1-4f7d-9a4c-5ede6070f762"
     },
     "_loop": false,
     "_mute": false,
     "_volume": 1,
-    "playOnAwake": false
+    "_playbackRate": 1,
+    "playOnLoad": false
   },
   {
     "__type__": "Fire.Entity",
@@ -1145,14 +1145,14 @@
       "__id__": 52
     },
     "_enabled": true,
-    "_playbackRate": 1,
     "_clip": {
       "__uuid__": "c7593d96-69f7-4b78-b5bc-cfc4cdc1244c"
     },
     "_loop": true,
     "_mute": false,
     "_volume": 1,
-    "playOnAwake": true
+    "_playbackRate": 1,
+    "playOnLoad": true
   },
   {
     "__type__": "Fire.Entity",
@@ -1203,14 +1203,14 @@
       "__id__": 55
     },
     "_enabled": true,
-    "_playbackRate": 1,
     "_clip": {
       "__uuid__": "5486221f-527b-4def-a800-c68239f0e596"
     },
     "_loop": false,
     "_mute": false,
     "_volume": 1,
-    "playOnAwake": false
+    "_playbackRate": 1,
+    "playOnLoad": false
   },
   {
     "__type__": "Fire.Entity",
@@ -1261,14 +1261,14 @@
       "__id__": 58
     },
     "_enabled": true,
-    "_playbackRate": 1,
     "_clip": {
-      "__uuid__": "088a30e3-0e85-4ccb-9bc0-08ffa17a85fd"
+      "__uuid__": "0a3948d0-5044-4436-bd24-65c04ea27b58"
     },
     "_loop": false,
     "_mute": false,
     "_volume": 1,
-    "playOnAwake": false
+    "_playbackRate": 1,
+    "playOnLoad": false
   },
   {
     "__type__": "Fire.Entity",
@@ -1498,7 +1498,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 192,
     "height_": 42
   },
@@ -1520,7 +1520,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": true,
+    "_useCustomSize": false,
     "width_": 300,
     "height_": 200
   },
@@ -1583,7 +1583,7 @@
       "b": 1,
       "a": 1
     },
-    "customSize_": false,
+    "_useCustomSize": false,
     "width_": 104,
     "height_": 58
   },
@@ -1611,6 +1611,13 @@
       "__uuid__": "89ddf309-1d6c-4eed-9d24-404ea2abc960"
     },
     "_text": "0",
+    "_color": {
+      "__type__": "Fire.Color",
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+    },
     "_anchor": 4,
     "_align": 0
   },

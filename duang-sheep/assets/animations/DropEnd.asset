@@ -4,7 +4,7 @@
   "_objFlags": 0,
   "wrapMode": 0,
   "stopAction": 0,
-  "speed": 1,
+  "speed": 0.6,
   "_frameRate": 60,
   "frameInfos": [
     {
