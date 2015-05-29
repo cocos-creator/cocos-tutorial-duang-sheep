@@ -1,0 +1,15 @@
+{
+  "buildPath": "/Users/nantas/projects/fireball-x/tutorial/duang-sheep/mobile-duang-sheep",
+  "defaultScene": "ad437e4f-5d19-42c1-92dd-ba90f0f40541",
+  "isDebug": false,
+  "platform": "web-mobile",
+  "projectName": "duang-sheep",
+  "sceneList": [
+    {
+      "checked": true,
+      "index": 0,
+      "name": "assets://scenes/Game.fire",
+      "value": "ad437e4f-5d19-42c1-92dd-ba90f0f40541"
+    }
+  ]
+}

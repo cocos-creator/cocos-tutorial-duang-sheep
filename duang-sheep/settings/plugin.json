@@ -1,0 +1,53 @@
+{
+  "builtins": {
+    "asset-db-debugger": {
+      "enable": true
+    },
+    "atlas": {
+      "enable": true
+    },
+    "auto-updater": {
+      "enable": true
+    },
+    "build-settings": {
+      "enable": true
+    },
+    "code-editor": {
+      "enable": true
+    },
+    "fire-about": {
+      "enable": true
+    },
+    "fire-assets": {
+      "enable": true
+    },
+    "fire-console": {
+      "enable": true
+    },
+    "fire-game": {
+      "enable": true
+    },
+    "fire-hierarchy": {
+      "enable": true
+    },
+    "fire-inspector": {
+      "enable": true
+    },
+    "fire-scene": {
+      "enable": true
+    },
+    "quick-view": {
+      "enable": true
+    },
+    "sprite-animation": {
+      "enable": true
+    },
+    "fire-login": {
+      "enable": true
+    },
+    "fire-animation": {
+      "enable": true
+    }
+  },
+  "globals": {}
+}
