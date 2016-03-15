@@ -49,7 +49,7 @@ var GameManager = cc.Class({
         this.gameState = GameState.Menu;
         //-- 分数
         this.score = 0;
-        this.scoreText.text = this.score;
+        this.scoreText.string = this.score;
         this.gameOverMenu.active = false;
         this.sheep.init(this);
         this.pipeGroupMgr.init(this);
@@ -71,7 +71,7 @@ var GameManager = cc.Class({
         this.gameOverMenu.active = true;
     },
     //-- 更新分数
-    score () {
+    gainScore () {
         //-- 分数+1
         this.score++;
         this.scoreText.string = this.score;

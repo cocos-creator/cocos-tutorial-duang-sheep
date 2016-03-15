@@ -8,6 +8,8 @@ var State = cc.Enum({
     Dead   : -1
 });
 
+var Dust = require('Dust');
+
 var Sheep = cc.Class({
     //-- 继承
     extends: cc.Component,
@@ -37,6 +39,7 @@ var Sheep = cc.Class({
                     this._state = value;
                     if (this._state !== State.None) {
                         var animName = State[this._state];
+                        this.anim.stop();
                         this.anim.play(animName);
                     }
                 }
@@ -47,7 +50,8 @@ var Sheep = cc.Class({
         jumpAudio: {
             default: null,
             url: cc.AudioClip
-        }
+        },
+        dustPrefab: cc.Prefab
     },
     statics: {
         State: State
@@ -116,6 +120,7 @@ var Sheep = cc.Class({
                 if (this.node.y < this.groundY) {
                     this.node.y = this.groundY;
                     this.state = State.DropEnd;
+                    this.spawnDust('DustDown');
                 }
                 break;
         }
@@ -145,13 +150,13 @@ var Sheep = cc.Class({
         let topPipe = this.nextPipe.topPipe;
         let botPipe = this.nextPipe.botPipe;
         // top collision
-        if (sheepTop > topPipe.y && sheepRight > topPipe.x - topPipe.width/2 &&
-            sheepLeft < topPipe.x + topPipe.width/2) {
+        if (sheepTop > topPipe.y && sheepRight > this.nextPipe.node.x - topPipe.width/2 &&
+            sheepLeft < this.nextPipe.node.x + topPipe.width/2) {
             collide = true;
         }
         // bot collision
-        if (sheepTop < botPipe.y && sheepRight > botPipe.x - botPipe.width/2 &&
-            sheepLeft < botPipe.x + botPipe.width/2) {
+        if (sheepTop < botPipe.y && sheepRight > this.nextPipe.node.x - botPipe.width/2 &&
+            sheepLeft < this.nextPipe.node.x + botPipe.width/2) {
             collide = true;
         }
 
@@ -161,8 +166,8 @@ var Sheep = cc.Class({
             this.enableInput(false);
         } else {
             // if jump over
-            if (sheepRight > this.nextPipe.x + topPipe.width/2) {
-                this.game.score();
+            if (sheepLeft > this.nextPipe.node.x + topPipe.width/2) {
+                this.game.gainScore();
                 this.getNextPipe();
             }
         }
@@ -173,5 +178,17 @@ var Sheep = cc.Class({
         this.currentSpeed = this.initJumpSpeed;
         //-- 播放跳音效
         cc.audioEngine.playEffect(this.jumpAudio);
+        this.spawnDust('DustUp');
+    },
+    spawnDust (animName) {
+        let dust = null;
+        if (cc.pool.hasObject(Dust)) {
+            dust = cc.pool.getFromPool(Dust);
+        } else {
+            dust = cc.instantiate(this.dustPrefab).getComponent(Dust);
+        }
+        this.node.parent.addChild(dust.node);
+        dust.node.position = this.node.position;
+        dust.playAnim(animName);
     }
 });

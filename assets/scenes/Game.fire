@@ -38,6 +38,9 @@
       },
       {
         "__id__": 34
+      },
+      {
+        "__id__": 37
       }
     ],
     "_localZOrder": 0,
@@ -888,7 +891,7 @@
       "__id__": 22
     },
     "_enabled": true,
-    "colliderRadius": 50,
+    "colliderRadius": 40,
     "maxY": 620,
     "groundY": -352,
     "gravity": 980,
@@ -896,6 +899,9 @@
     "_state": 0,
     "jumpAudio": {
       "__uuid__": "174d70e1-6720-4446-a6e3-c7b00294df06"
+    },
+    "dustPrefab": {
+      "__uuid__": "7d87b2ed-c94c-4951-ab2b-10189bdc3730"
     }
   },
   {
@@ -1305,6 +1311,84 @@
       "__id__": 16
     },
     "initPipeX": 700,
-    "spawnInterval": 1.5
+    "spawnInterval": 1.8
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "number2",
+    "_objFlags": 0,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_parent": {
+      "__id__": 1
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 44,
+      "height": 36
+    },
+    "_children": [],
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_tag": -1,
+    "_opacityModifyRGB": false,
+    "_id": "568ab1WKk1Hv7uMotie543e",
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 38
+      }
+    ],
+    "_prefab": null
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 37
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "70adad7f-8b54-4403-a994-c978a34bcd22"
+    },
+    "_type": 0,
+    "_useOriginalSize": true,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
   }
 ]
