@@ -69,6 +69,7 @@ var GameManager = cc.Class({
         this.pipeGroupMgr.reset();
         this.gameState = GameState.Over;
         this.gameOverMenu.active = true;
+        this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;
     },
     //-- 更新分数
     gainScore () {
