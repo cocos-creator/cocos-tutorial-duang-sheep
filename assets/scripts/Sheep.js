@@ -85,6 +85,7 @@ var Sheep = cc.Class({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             onTouchBegan: function(touch, event) {
                 this.jump();
+                return true;
             }.bind(this)
         }, this.node);
     },
