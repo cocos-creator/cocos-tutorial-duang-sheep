@@ -6,7 +6,7 @@
   "filterMode": "bilinear",
   "subMetas": {
     "fx_downfog05": {
-      "ver": "1.0.2",
+      "ver": "1.0.3",
       "uuid": "e0776d0e-109c-41d3-9d50-5a3fb099530a",
       "rawTextureUuid": "d35a4145-4c45-4e9a-9fd0-b9153e333af5",
       "trimType": "auto",
@@ -18,6 +18,8 @@
       "trimY": 18,
       "width": 144,
       "height": 45,
+      "rawWidth": 196,
+      "rawHeight": 102,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

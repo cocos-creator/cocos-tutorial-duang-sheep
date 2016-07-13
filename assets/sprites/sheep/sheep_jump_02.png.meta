@@ -6,7 +6,7 @@
   "filterMode": "bilinear",
   "subMetas": {
     "sheep_jump_02": {
-      "ver": "1.0.2",
+      "ver": "1.0.3",
       "uuid": "38b30901-4bb4-4f20-aa5d-061fc2317ac9",
       "rawTextureUuid": "36027854-886c-420b-a8a2-01ac229bfb28",
       "trimType": "auto",
@@ -18,6 +18,8 @@
       "trimY": 12,
       "width": 154,
       "height": 131,
+      "rawWidth": 228,
+      "rawHeight": 159,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,
