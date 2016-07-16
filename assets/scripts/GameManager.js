@@ -45,6 +45,9 @@ var GameManager = cc.Class({
         }
     },
     onLoad () {
+        // activate colliders
+        cc.director.getCollisionManager().enabled = true;
+
         //-- 游戏状态
         this.gameState = GameState.Menu;
         //-- 分数

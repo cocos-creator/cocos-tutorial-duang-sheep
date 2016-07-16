@@ -3,7 +3,7 @@
   "_name": "Jump",
   "_objFlags": 0,
   "_rawFiles": null,
-  "_duration": 0.5,
+  "_duration": 0.6,
   "sample": 10,
   "speed": 1,
   "wrapMode": 1,
@@ -14,17 +14,23 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "9fe4db21-b001-4d5b-bd91-681922c640c5"
+              "__uuid__": "38b30901-4bb4-4f20-aa5d-061fc2317ac9"
             }
           },
           {
-            "frame": 0.2,
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "28bcfb76-c60a-4715-a3f0-8ce5960b407d"
+            }
+          },
+          {
+            "frame": 0.3,
             "value": {
               "__uuid__": "6c91e171-2928-4c22-8e53-89b44b6fdbf4"
             }
           },
           {
-            "frame": 0.4,
+            "frame": 0.5,
             "value": {
               "__uuid__": "98d9fbdc-0492-4095-9f3a-2a6ec79dabf0"
             }

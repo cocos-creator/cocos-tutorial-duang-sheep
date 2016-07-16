@@ -102,77 +102,52 @@ var Sheep = cc.Class({
     },
     //-- 更新
     update (dt) {
-        if (this.state === State.None || this.state === State.Dead) {
-            return;
-        }
-        this._updateState(dt);
-        this._updatePosition(dt);
-        this._detectCollision();
-    },
-    //-- 更新绵羊状态
-    _updateState (dt) {
         switch (this.state) {
-            case Sheep.State.Jump:
+            case State.Jump:
                 if (this.currentSpeed < 0) {
                     this.state = State.Drop;
                 }
                 break;
-            case Sheep.State.Drop:
+            case State.Drop:
                 if (this.node.y < this.groundY) {
                     this.node.y = this.groundY;
                     this.state = State.DropEnd;
                     this.spawnDust('DustDown');
                 }
                 break;
+            case State.None:
+            case State.Dead:
+                return;
         }
-    },
-    onDropFinished () {
-        this.state = State.Run;
-    },
-    //-- 更新绵羊坐标
-    _updatePosition (dt) {
-        var flying = this.state === Sheep.State.Jump || this.node.y > this.groundY;
+        var flying = this.state === State.Jump || this.node.y > this.groundY;
         if (flying) {
             this.currentSpeed -= dt * this.gravity;
             this.node.y += dt * this.currentSpeed;
         }
     },
-    //-- 碰撞检测
-    _detectCollision () {
-        if (!this.nextPipe) {
-            return;
-        }
-        let collide = false;
-        // objects
-        let sheepTop = this.node.y + this.colliderRadius * 2;
-        let sheepBot = this.node.y;
-        let sheepRight = this.node.x + this.colliderRadius;
-        let sheepLeft = this.node.x - this.colliderRadius;
-        let topPipe = this.nextPipe.topPipe;
-        let botPipe = this.nextPipe.botPipe;
-        // top collision
-        if (sheepTop > topPipe.y && sheepRight > this.nextPipe.node.x - topPipe.width/2 &&
-            sheepLeft < this.nextPipe.node.x + topPipe.width/2) {
-            collide = true;
-        }
-        // bot collision
-        if (sheepTop < botPipe.y && sheepRight > this.nextPipe.node.x - botPipe.width/2 &&
-            sheepLeft < this.nextPipe.node.x + botPipe.width/2) {
-            collide = true;
-        }
 
-        if (collide) {
-            this.state = Sheep.State.Dead;
-            this.game.gameOver();
-            this.enableInput(false);
-        } else {
-            // if jump over
-            if (sheepLeft > this.nextPipe.node.x + topPipe.width/2) {
+
+    onDropFinished () {
+        this.state = State.Run;
+    },
+
+    onCollisionEnter: function (other) {
+        if (this.state !== State.Dead) {
+            var group = cc.game.groupList[other.node.groupIndex];
+            if (group === 'Obstacle') {
+                // bump
+                this.state = Sheep.State.Dead;
+                this.game.gameOver();
+                this.enableInput(false);
+            }
+            else if (group === 'NextPipe') {
+                // jump over
                 this.game.gainScore();
                 this.getNextPipe();
             }
-        }
+       }
     },
+
     //-- 开始跳跃设置状态数据，播放动画
     jump: function () {
         this.state = State.Jump;
