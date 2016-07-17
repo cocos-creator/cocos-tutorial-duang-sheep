@@ -274,7 +274,7 @@
     "node": {
       "__id__": 4
     },
-    "_enabled": false,
+    "_enabled": true,
     "isAlignOnce": true,
     "_alignFlags": 45,
     "_left": 0,
@@ -377,7 +377,7 @@
     "node": {
       "__id__": 7
     },
-    "_enabled": false,
+    "_enabled": true,
     "isAlignOnce": true,
     "_alignFlags": 45,
     "_left": 0,
@@ -574,7 +574,7 @@
     "node": {
       "__id__": 3
     },
-    "_enabled": false,
+    "_enabled": true,
     "isAlignOnce": true,
     "_alignFlags": 45,
     "_left": 0,
@@ -675,7 +675,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -349
+      "y": -347
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1229,7 +1229,7 @@
     "node": {
       "__id__": 30
     },
-    "_enabled": false,
+    "_enabled": true,
     "isAlignOnce": true,
     "_alignFlags": 9,
     "_left": 62,
