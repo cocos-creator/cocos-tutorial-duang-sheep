@@ -15,7 +15,6 @@ var Sheep = cc.Class({
     extends: cc.Component,
     //-- 属性
     properties: {
-        colliderRadius: 0,
         //-- Y轴最大高度
         maxY: 0,
         //-- 地面高度
@@ -56,8 +55,7 @@ var Sheep = cc.Class({
     statics: {
         State: State
     },
-    init (game) {
-        this.game = game;
+    init () {
         //-- 当前播放动画组件
         this.anim = this.getComponent(cc.Animation);
         //-- 当前速度
@@ -67,7 +65,6 @@ var Sheep = cc.Class({
         this.registerInput();
     },
     startRun () {
-        this.getNextPipe();
         this.state = State.Run;
         this.enableInput(true);
     },
@@ -97,9 +94,7 @@ var Sheep = cc.Class({
             cc.eventManager.pauseTarget(this.node);
         }
     },
-    getNextPipe () {
-        this.nextPipe = this.game.pipeGroupMgr.getNext();
-    },
+
     //-- 更新
     update (dt) {
         switch (this.state) {
@@ -126,7 +121,7 @@ var Sheep = cc.Class({
         }
     },
 
-
+    // invoked by animation
     onDropFinished () {
         this.state = State.Run;
     },
@@ -137,13 +132,12 @@ var Sheep = cc.Class({
             if (group === 'Obstacle') {
                 // bump
                 this.state = Sheep.State.Dead;
-                this.game.gameOver();
+                D.game.gameOver();
                 this.enableInput(false);
             }
             else if (group === 'NextPipe') {
                 // jump over
-                this.game.gainScore();
-                this.getNextPipe();
+                D.game.gainScore();
             }
        }
     },

@@ -1,24 +1,18 @@
 var Sheep = require('Sheep');
 var Scroller = require('Scroller');
-var PipeGroupManager = require('PipeGroupManager');
 
-var GameState = cc.Enum({
+var State = cc.Enum({
     Menu: -1,
     Run : -1,
     Over: -1
 });
+
 var GameManager = cc.Class({
     extends: cc.Component,
     //-- 属性
     properties: {
         //-- 获取绵羊
         sheep: Sheep,
-        //-- 获取背景
-        sky: Scroller,
-        //-- 获取地面
-        ground: Scroller,
-        //-- 获取障碍物管理
-        pipeGroupMgr: PipeGroupManager,
         //-- 获取gameOverMenu对象
         gameOverMenu: cc.Node,
         //-- 获取分数对象
@@ -44,24 +38,31 @@ var GameManager = cc.Class({
             url: cc.AudioClip
         }
     },
+
+    statics: {
+        State
+    },
+
     onLoad () {
+        D.GameManager = GameManager;
+        D.game = this;
+
         // activate colliders
         cc.director.getCollisionManager().enabled = true;
 
         //-- 游戏状态
-        this.gameState = GameState.Menu;
+        this.state = State.Menu;
         //-- 分数
         this.score = 0;
         this.scoreText.string = this.score;
         this.gameOverMenu.active = false;
-        this.sheep.init(this);
-        this.pipeGroupMgr.init(this);
+        this.sheep.init();
     },
     //-- 开始
     start () {
-        this.gameState = GameState.Run;
+        this.state = State.Run;
         this.score = 0;
-        this.pipeGroupMgr.startSpawn();
+        D.pipeManager.startSpawn();
         this.sheep.startRun();
     },
     gameOver () {
@@ -69,8 +70,8 @@ var GameManager = cc.Class({
         cc.audioEngine.stopMusic(this.gameBgAudio);
         cc.audioEngine.playEffect(this.dieAudio);
         cc.audioEngine.playEffect(this.gameOverAudio);
-        this.pipeGroupMgr.reset();
-        this.gameState = GameState.Over;
+        D.pipeManager.reset();
+        this.state = State.Over;
         this.gameOverMenu.active = true;
         this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;
     },

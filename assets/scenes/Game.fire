@@ -81,6 +81,9 @@
         "__id__": 3
       },
       {
+        "__id__": 11
+      },
+      {
         "__id__": 16
       },
       {
@@ -154,9 +157,6 @@
       },
       {
         "__id__": 7
-      },
-      {
-        "__id__": 10
       }
     ],
     "_rotationX": 0,
@@ -179,7 +179,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 15
+        "__id__": 10
       }
     ],
     "_prefab": null,
@@ -392,8 +392,29 @@
     "_originalHeight": 40
   },
   {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 3
+    },
+    "_enabled": true,
+    "isAlignOnce": true,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0
+  },
+  {
     "__type__": "cc.Node",
-    "_name": "skyBG",
+    "_name": "sky",
     "_objFlags": 0,
     "_opacity": 255,
     "_color": {
@@ -405,7 +426,7 @@
     },
     "_cascadeOpacityEnabled": true,
     "_parent": {
-      "__id__": 3
+      "__id__": 2
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -419,7 +440,7 @@
     },
     "_children": [
       {
-        "__id__": 11
+        "__id__": 12
       }
     ],
     "_rotationX": 0,
@@ -442,10 +463,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 14
       },
       {
-        "__id__": 14
+        "__id__": 15
       }
     ],
     "_prefab": null,
@@ -453,7 +474,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bg2",
+    "_name": "sky2",
     "_objFlags": 0,
     "_opacity": 255,
     "_color": {
@@ -465,7 +486,7 @@
     },
     "_cascadeOpacityEnabled": true,
     "_parent": {
-      "__id__": 10
+      "__id__": 11
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -498,11 +519,37 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 13
       }
     ],
     "_prefab": null,
     "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "fd4bac0b-3745-4070-80fd-2857ddabd10e"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
   },
   {
     "__type__": "cc.Sprite",
@@ -531,62 +578,15 @@
     "_atlas": null
   },
   {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 10
-    },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "fd4bac0b-3745-4070-80fd-2857ddabd10e"
-    },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": null
-  },
-  {
     "__type__": "b90489JvD1O1pgXMQXSKGr7",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 10
+      "__id__": 11
     },
     "_enabled": true,
     "speed": -200,
     "resetX": -1100
-  },
-  {
-    "__type__": "cc.Widget",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 3
-    },
-    "_enabled": true,
-    "isAlignOnce": true,
-    "_alignFlags": 45,
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
-    "_isAbsLeft": true,
-    "_isAbsRight": true,
-    "_isAbsTop": true,
-    "_isAbsBottom": true,
-    "_originalWidth": 0,
-    "_originalHeight": 0
   },
   {
     "__type__": "cc.Node",
@@ -699,7 +699,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ground",
+    "_name": "ground2",
     "_objFlags": 0,
     "_opacity": 255,
     "_color": {
@@ -992,7 +992,6 @@
       "__id__": 22
     },
     "_enabled": true,
-    "colliderRadius": 40,
     "maxY": 620,
     "groundY": -352,
     "gravity": 980,
@@ -1802,15 +1801,6 @@
     "_enabled": true,
     "sheep": {
       "__id__": 27
-    },
-    "sky": {
-      "__id__": 14
-    },
-    "ground": {
-      "__id__": 21
-    },
-    "pipeGroupMgr": {
-      "__id__": 51
     },
     "gameOverMenu": {
       "__id__": 35
