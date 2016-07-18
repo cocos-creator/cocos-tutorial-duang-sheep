@@ -9,6 +9,9 @@ cc.Class({
     },
 
     update (dt) {
+        if (D.game.state !== D.GameManager.State.Run) {
+            return;
+        }
         var x = this.node.x;
         x += this.speed * dt;
         if (x <= this.resetX) {

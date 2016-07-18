@@ -2,7 +2,6 @@ cc.Class({
     extends: cc.Component,
     properties: {
         speed: 0,
-        resetX: 0,
         botYRange: cc.p(0, 0),
         spacingRange: cc.p(0, 0),
         topPipe: cc.Node,
@@ -19,8 +18,11 @@ cc.Class({
         if (D.game.state !== D.GameManager.State.Run) {
             return;
         }
+
         this.node.x += this.speed * dt;
-        if (this.node.x < this.resetX) {
+
+        var disappear = this.node.getBoundingBoxToWorld().xMax < 0;
+        if (disappear) {
             D.pipeManager.despawnPipe(this);
         }
     }
