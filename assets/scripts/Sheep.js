@@ -130,6 +130,9 @@ var Sheep = cc.Class({
         if (this.state !== State.Dead) {
             var group = cc.game.groupList[other.node.groupIndex];
             if (group === 'Obstacle') {
+                if (D.game.supermanMode) {
+                    return;
+                }
                 // bump
                 this.state = Sheep.State.Dead;
                 D.game.gameOver();

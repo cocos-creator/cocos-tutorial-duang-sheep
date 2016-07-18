@@ -36,6 +36,11 @@ var GameManager = cc.Class({
         scoreAudio: {
             default: null,
             url: cc.AudioClip
+        },
+
+        supermanMode: {
+            default: false,
+            tooltip: '无敌模式, 方便测试地图'
         }
     },
 
