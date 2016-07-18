@@ -12,7 +12,7 @@
     "__type__": "cc.Node",
     "_name": "dust",
     "_objFlags": 0,
-    "_opacity": 255,
+    "_opacity": 222,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -48,6 +48,7 @@
     "_globalZOrder": 0,
     "_tag": -1,
     "_opacityModifyRGB": false,
+    "_reorderChildDirty": false,
     "_id": "",
     "_active": true,
     "_components": [
@@ -63,7 +64,8 @@
     ],
     "_prefab": {
       "__id__": 5
-    }
+    },
+    "groupIndex": 0
   },
   {
     "__type__": "cc.Sprite",
@@ -77,7 +79,6 @@
       "__uuid__": "dc55103c-6746-43ea-b060-337585593d67"
     },
     "_type": 0,
-    "_useOriginalSize": true,
     "_sizeMode": 2,
     "_fillType": 0,
     "_fillCenter": {
@@ -130,7 +131,9 @@
     "root": {
       "__id__": 1
     },
-    "asset": null,
+    "asset": {
+      "__uuid__": "7d87b2ed-c94c-4951-ab2b-10189bdc3730"
+    },
     "fileId": "2b091w5kBpDrp9U8mgt0S6r"
   }
 ]

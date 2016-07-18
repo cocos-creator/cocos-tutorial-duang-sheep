@@ -1,3 +1,25 @@
 {
-  "start-scene": ""
+  "collision-matrix": [
+    [
+      false,
+      true,
+      false
+    ],
+    [
+      true,
+      false,
+      true
+    ],
+    [
+      false,
+      true,
+      false
+    ]
+  ],
+  "group-list": [
+    "Obstacle",
+    "Player",
+    "NextPipe"
+  ],
+  "start-scene": "56dac6d2-7dd6-4ccf-bb02-e1b92998ea58"
 }
