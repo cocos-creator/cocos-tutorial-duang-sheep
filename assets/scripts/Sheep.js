@@ -50,7 +50,17 @@ var Sheep = cc.Class({
             default: null,
             url: cc.AudioClip
         },
-        dustPrefab: cc.Prefab
+        dustPrefab: cc.Prefab,
+
+        addEnergyOnGround: {
+            default: 0.5,
+            tooltip: '每秒在地上恢复的能量值'
+        },
+        jumpEnergyCost: {
+            default: 0.3,
+            tooltip: '每次跳跃消耗的能量值'
+        },
+        energyBar: cc.ProgressBar,
     },
     statics: {
         State: State
@@ -63,8 +73,10 @@ var Sheep = cc.Class({
         //-- 绵羊图片渲染
         this.sprite = this.getComponent(cc.Sprite);
         this.registerInput();
+        this.energy = 1;
     },
     startRun () {
+        this.energy = 1;
         this.state = State.Run;
         this.enableInput(true);
     },
@@ -119,6 +131,13 @@ var Sheep = cc.Class({
             this.currentSpeed -= dt * this.gravity;
             this.node.y += dt * this.currentSpeed;
         }
+        else {
+            this.energy += this.addEnergyOnGround * dt;
+        }
+
+        // update energy
+        this.energy = cc.clamp01(this.energy);
+        this.energyBar.progress = this.energy;
     },
 
     // invoked by animation
@@ -147,11 +166,18 @@ var Sheep = cc.Class({
 
     //-- 开始跳跃设置状态数据，播放动画
     jump: function () {
-        this.state = State.Jump;
-        this.currentSpeed = this.initJumpSpeed;
-        //-- 播放跳音效
-        cc.audioEngine.playEffect(this.jumpAudio);
-        this.spawnDust('DustUp');
+        if (this.energy >= this.jumpEnergyCost) {
+            this.energy -= this.jumpEnergyCost;
+
+            this.state = State.Jump;
+            this.currentSpeed = this.initJumpSpeed;
+            this.spawnDust('DustUp');
+            //-- 播放跳音效
+            cc.audioEngine.playEffect(this.jumpAudio);
+        }
+        else {
+            cc.audioEngine.playEffect(D.game.dieAudio);
+        }
     },
     spawnDust (animName) {
         let dust = null;

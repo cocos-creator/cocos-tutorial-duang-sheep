@@ -67,6 +67,7 @@ var GameManager = cc.Class({
     start () {
         this.state = State.Run;
         this.score = 0;
+        cc.audioEngine.playMusic(this.gameBgAudio);
         D.pipeManager.startSpawn();
         this.sheep.startRun();
     },
