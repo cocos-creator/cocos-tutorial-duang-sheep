@@ -4,24 +4,48 @@
       false,
       true,
       false,
+      false,
+      false,
       false
     ],
     [
       true,
       false,
       true,
+      true,
+      false,
       true
     ],
     [
       false,
       true,
       false,
+      false,
+      false,
       false
     ],
     [
       false,
       true,
       false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      true,
       false
     ]
   ],
@@ -29,7 +53,9 @@
     "Obstacle",
     "Player",
     "NextPipe",
-    "Prop"
+    "Prop",
+    "Ground",
+    "Driller"
   ],
   "start-scene": "56dac6d2-7dd6-4ccf-bb02-e1b92998ea58"
 }

@@ -6,5 +6,7 @@ window.D = {
     game: null,
     pipeManager: null,
     sceneManager: null,
-    starManager: null
+    starManager: null,
+    drillerManager: null,
+    sheep: null,
 };

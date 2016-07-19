@@ -36,7 +36,8 @@ cc.Class({
         for (var i = 0; i < children.length; i++) {
             var node = children[i];
             node.x += distance;
-            var disappear = node.getBoundingBoxToWorld().xMax < 0;
+            var bounds = node.getBoundingBoxToWorld();
+            var disappear = bounds.xMax < 0;
             if (disappear) {
                 this.despawn(node.getComponent(SceneObject));
             }

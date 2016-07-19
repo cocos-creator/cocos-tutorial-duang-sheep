@@ -70,6 +70,7 @@ var GameManager = cc.Class({
         cc.audioEngine.playMusic(this.gameBgAudio);
         D.pipeManager.startSpawn();
         D.starManager.start();
+        D.drillerManager.start();
         this.sheep.startRun();
     },
     gameOver () {
@@ -78,6 +79,8 @@ var GameManager = cc.Class({
         cc.audioEngine.playEffect(this.dieAudio);
         cc.audioEngine.playEffect(this.gameOverAudio);
         D.pipeManager.reset();
+        D.starManager.reset();
+        D.drillerManager.reset();
         this.state = State.Over;
         this.gameOverMenu.active = true;
         this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;

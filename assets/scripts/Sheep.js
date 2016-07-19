@@ -69,6 +69,7 @@ var Sheep = cc.Class({
         State: State
     },
     init () {
+        D.sheep = this;
         //-- 当前播放动画组件
         this.anim = this.getComponent(cc.Animation);
         //-- 当前速度
@@ -77,6 +78,10 @@ var Sheep = cc.Class({
         this.sprite = this.getComponent(cc.Sprite);
         this.registerInput();
         this.energy = 1;
+
+        this._bindedScheduleFunc = () => {
+            this.exitInvincible();
+        };
     },
     startRun () {
         this.energy = 1;
@@ -151,6 +156,9 @@ var Sheep = cc.Class({
             if (hasInvincibleAnim) {
                 animName = invincibleAnimName;
             }
+            else {
+                animName = 'Run_invincible';
+            }
         }
         this.anim.stop();
         this.anim.play(animName);
@@ -166,6 +174,7 @@ var Sheep = cc.Class({
             var group = cc.game.groupList[other.node.groupIndex];
             switch (group) {
                 case 'Obstacle':
+                case 'Driller':
                     if (D.game.supermanMode) {
                         return;
                     }
@@ -192,16 +201,20 @@ var Sheep = cc.Class({
     enterInvincible () {
         this.invincible = true;
         this._updateAnimation();
-        this.scheduleOnce(() => {
-            this.exitInvincible();
-        }, this.invincibleTime);
+        this.unschedule(this._bindedScheduleFunc);
+        var timeScale = this.invincibleSpeed / this.normalSpeed;
+        this.scheduleOnce(this._bindedScheduleFunc, this.invincibleTime * timeScale);
         D.sceneManager.objectSpeed = this.invincibleSpeed;
+        // 无敌后，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
+        cc.director.getScheduler().setTimeScale(timeScale);
     },
 
     exitInvincible () {
         D.sceneManager.objectSpeed = this.normalSpeed;
         this.invincible = false;
         this._updateAnimation();
+        // 还原之前的设置，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
+        cc.director.getScheduler().setTimeScale(1.0);
     },
 
     //-- 开始跳跃设置状态数据，播放动画
