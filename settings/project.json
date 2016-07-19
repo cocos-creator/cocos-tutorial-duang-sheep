@@ -3,23 +3,33 @@
     [
       false,
       true,
+      false,
       false
     ],
     [
       true,
       false,
+      true,
       true
     ],
     [
       false,
       true,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
       false
     ]
   ],
   "group-list": [
     "Obstacle",
     "Player",
-    "NextPipe"
+    "NextPipe",
+    "Prop"
   ],
   "start-scene": "56dac6d2-7dd6-4ccf-bb02-e1b92998ea58"
 }

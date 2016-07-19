@@ -5,4 +5,6 @@ window.D = {
     // singletons
     game: null,
     pipeManager: null,
+    sceneManager: null,
+    starManager: null
 };

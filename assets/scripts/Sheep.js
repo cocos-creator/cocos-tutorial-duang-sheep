@@ -37,9 +37,7 @@ var Sheep = cc.Class({
                 if (value !== this._state) {
                     this._state = value;
                     if (this._state !== State.None) {
-                        var animName = State[this._state];
-                        this.anim.stop();
-                        this.anim.play(animName);
+                        this._updateAnimation();
                     }
                 }
             },
@@ -61,6 +59,11 @@ var Sheep = cc.Class({
             tooltip: '每次跳跃消耗的能量值'
         },
         energyBar: cc.ProgressBar,
+
+        invincible: false,
+        invincibleTime: 3,
+        invincibleSpeed: -600,
+        normalSpeed: -300
     },
     statics: {
         State: State
@@ -140,6 +143,19 @@ var Sheep = cc.Class({
         this.energyBar.progress = this.energy;
     },
 
+    _updateAnimation () {
+        var animName = State[this._state];
+        if (this.invincible) {
+            var invincibleAnimName = animName + '_invincible';
+            var hasInvincibleAnim = this.anim.getAnimationState(invincibleAnimName);
+            if (hasInvincibleAnim) {
+                animName = invincibleAnimName;
+            }
+        }
+        this.anim.stop();
+        this.anim.play(animName);
+    },
+
     // invoked by animation
     onDropFinished () {
         this.state = State.Run;
@@ -148,20 +164,44 @@ var Sheep = cc.Class({
     onCollisionEnter: function (other) {
         if (this.state !== State.Dead) {
             var group = cc.game.groupList[other.node.groupIndex];
-            if (group === 'Obstacle') {
-                if (D.game.supermanMode) {
-                    return;
-                }
-                // bump
-                this.state = Sheep.State.Dead;
-                D.game.gameOver();
-                this.enableInput(false);
-            }
-            else if (group === 'NextPipe') {
-                // jump over
-                D.game.gainScore();
+            switch (group) {
+                case 'Obstacle':
+                    if (D.game.supermanMode) {
+                        return;
+                    }
+                    if (this.invincible) {
+                        return;
+                    }
+                    // bump
+                    this.state = Sheep.State.Dead;
+                    D.game.gameOver();
+                    this.enableInput(false);
+                    break;
+                case 'NextPipe':
+                    // jump over
+                    D.game.gainScore();
+                    break;
+                case 'Prop':
+                    // 无敌了也
+                    this.enterInvincible();
+                    break;
             }
        }
+    },
+
+    enterInvincible () {
+        this.invincible = true;
+        this._updateAnimation();
+        this.scheduleOnce(() => {
+            this.exitInvincible();
+        }, this.invincibleTime);
+        D.sceneManager.objectSpeed = this.invincibleSpeed;
+    },
+
+    exitInvincible () {
+        D.sceneManager.objectSpeed = this.normalSpeed;
+        this.invincible = false;
+        this._updateAnimation();
     },
 
     //-- 开始跳跃设置状态数据，播放动画
