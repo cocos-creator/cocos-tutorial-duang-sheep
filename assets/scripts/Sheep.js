@@ -7,9 +7,6 @@ var State = cc.Enum({
     DropEnd: -1,
     Dead   : -1
 });
-
-var Dust = require('Dust');
-
 var Sheep = cc.Class({
     //-- 继承
     extends: cc.Component,
@@ -46,7 +43,7 @@ var Sheep = cc.Class({
         //-- 获取Jump音效
         jumpAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         dustPrefab: cc.Prefab,
 
@@ -91,27 +88,26 @@ var Sheep = cc.Class({
     //-- 初始化
     registerInput () {
         //-- 添加绵羊控制事件(为了注销事件缓存事件)
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function(keyCode, event) {
-                this.jump();
-            }.bind(this)
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, () => {
+            this.jump();
         }, this.node);
         // touch input
-        cc.eventManager.addListener({
-            event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            onTouchBegan: function(touch, event) {
-                this.jump();
-                return true;
-            }.bind(this)
+        cc.find('Canvas').on(cc.Node.EventType.TOUCH_START, () => {
+            this.jump();
         }, this.node);
     },
+
+    cancelListener () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN);
+        cc.find('Canvas').off(cc.Node.EventType.TOUCH_START);
+    },
+
     //-- 删除
     enableInput: function (enable) {
         if (enable) {
-            cc.eventManager.resumeTarget(this.node);
+            this.registerInput();
         } else {
-            cc.eventManager.pauseTarget(this.node);
+            this.cancelListener();
         }
     },
 
@@ -144,7 +140,7 @@ var Sheep = cc.Class({
         }
 
         // update energy
-        this.energy = cc.clamp01(this.energy);
+        this.energy = cc.misc.clamp01(this.energy);
         this.energyBar.progress = this.energy;
     },
 
@@ -233,14 +229,9 @@ var Sheep = cc.Class({
         }
     },
     spawnDust (animName) {
-        let dust = null;
-        if (cc.pool.hasObject(Dust)) {
-            dust = cc.pool.getFromPool(Dust);
-        } else {
-            dust = cc.instantiate(this.dustPrefab).getComponent(Dust);
-        }
-        this.node.parent.addChild(dust.node);
-        dust.node.position = this.node.position;
+        let dustType = 'Dust';
+        let dust = D.sceneManager.spawn(this.dustPrefab, dustType, this.node);
+        dust.node.position = cc.v2(0, 0);
         dust.playAnim(animName);
     }
 });

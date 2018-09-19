@@ -1,8 +1,8 @@
 cc.Class({
     extends: require('SceneObject'),
     properties: {
-        botYRange: cc.p(0, 0),
-        spacingRange: cc.p(0, 0),
+        botYRange: cc.v2(0, 0),
+        spacingRange: cc.v2(0, 0),
         topPipe: cc.Node,
         botPipe: cc.Node
     },
