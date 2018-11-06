@@ -1,43 +1,9 @@
 {
-  "__type__": "Editor.TextureMeta",
-  "ver": 0,
+  "ver": "2.2.0",
   "uuid": "e1ef952e-3283-4905-9376-cf7c8db6733c",
-  "subRawData": [
-    {
-      "asset": {
-        "__type__": "Fire.Sprite",
-        "_name": "sheep_run_02",
-        "_objFlags": 0,
-        "pivot": {
-          "__type__": "Fire.Vec2",
-          "x": 0.5,
-          "y": 0.5
-        },
-        "trimX": 27,
-        "trimY": 20,
-        "width": 176,
-        "height": 115,
-        "texture": {
-          "__uuid__": "e1ef952e-3283-4905-9376-cf7c8db6733c"
-        },
-        "rotated": false,
-        "x": 27,
-        "y": 20,
-        "rawWidth": 228,
-        "rawHeight": 159
-      },
-      "meta": {
-        "__type__": "Editor.SpriteMeta",
-        "ver": 0,
-        "uuid": "54338d59-c2ab-4530-86af-a9b6d9befbbf",
-        "atlasTag": "default",
-        "trimType": 0,
-        "trimThreshold": 1,
-        "rawTextureUuid": "e1ef952e-3283-4905-9376-cf7c8db6733c"
-      }
-    }
-  ],
   "type": 1,
   "wrapMode": 1,
-  "filterMode": 1
+  "filterMode": 1,
+  "premultiplyAlpha": false,
+  "subMetas": {}
 }

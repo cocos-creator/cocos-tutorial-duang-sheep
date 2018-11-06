@@ -1,5 +1,7 @@
 {
-  "__type__": "Editor.FolderMeta",
-  "ver": 0,
-  "uuid": "bf9ce222-ab1c-4e0b-8f4a-5d6bd3140993"
+  "ver": "1.0.1",
+  "uuid": "bf9ce222-ab1c-4e0b-8f4a-5d6bd3140993",
+  "isSubpackage": false,
+  "subpackageName": "",
+  "subMetas": {}
 }
