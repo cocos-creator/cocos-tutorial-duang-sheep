@@ -1,43 +1,9 @@
 {
-  "__type__": "Editor.TextureMeta",
-  "ver": 0,
+  "ver": "2.2.0",
   "uuid": "12fffe08-b03b-4b7d-930b-33f6775c73de",
-  "subRawData": [
-    {
-      "asset": {
-        "__type__": "Fire.Sprite",
-        "_name": "sheep_jump_02",
-        "_objFlags": 0,
-        "pivot": {
-          "__type__": "Fire.Vec2",
-          "x": 0.5,
-          "y": 0.5
-        },
-        "trimX": 24,
-        "trimY": 12,
-        "width": 154,
-        "height": 131,
-        "texture": {
-          "__uuid__": "12fffe08-b03b-4b7d-930b-33f6775c73de"
-        },
-        "rotated": false,
-        "x": 24,
-        "y": 12,
-        "rawWidth": 228,
-        "rawHeight": 159
-      },
-      "meta": {
-        "__type__": "Editor.SpriteMeta",
-        "ver": 0,
-        "uuid": "a1053628-711c-4033-863d-102c01ac0b5d",
-        "atlasTag": "default",
-        "trimType": 0,
-        "trimThreshold": 1,
-        "rawTextureUuid": "12fffe08-b03b-4b7d-930b-33f6775c73de"
-      }
-    }
-  ],
   "type": 1,
   "wrapMode": 1,
-  "filterMode": 1
+  "filterMode": 1,
+  "premultiplyAlpha": false,
+  "subMetas": {}
 }

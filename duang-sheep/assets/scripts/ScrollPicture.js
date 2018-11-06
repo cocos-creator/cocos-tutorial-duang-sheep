@@ -1,6 +1,6 @@
-var ScrollPicture = Fire.Class({
+var ScrollPicture = cc.Class({
     //-- 继承
-    extends: Fire.Component,
+    extends: cc.Component,
     //-- 属性
     properties: {
         //-- 滚动的速度
