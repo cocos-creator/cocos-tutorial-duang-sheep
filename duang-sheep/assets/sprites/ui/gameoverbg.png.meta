@@ -1,43 +1,31 @@
 {
-  "__type__": "Editor.TextureMeta",
-  "ver": 0,
+  "ver": "2.2.0",
   "uuid": "370d8f3f-c4cc-4586-9843-62d31ac703c5",
-  "subRawData": [
-    {
-      "asset": {
-        "__type__": "Fire.Sprite",
-        "_name": "gameoverbg",
-        "_objFlags": 0,
-        "pivot": {
-          "__type__": "Fire.Vec2",
-          "x": 0.5,
-          "y": 0.5
-        },
-        "trimX": 0,
-        "trimY": 0,
-        "width": 505,
-        "height": 361,
-        "texture": {
-          "__uuid__": "370d8f3f-c4cc-4586-9843-62d31ac703c5"
-        },
-        "rotated": false,
-        "x": 0,
-        "y": 0,
-        "rawWidth": 505,
-        "rawHeight": 361
-      },
-      "meta": {
-        "__type__": "Editor.SpriteMeta",
-        "ver": 0,
-        "uuid": "d571dd56-ceed-48f5-b4a9-155ff96078dc",
-        "atlasTag": "default",
-        "trimType": 0,
-        "trimThreshold": 1,
-        "rawTextureUuid": "370d8f3f-c4cc-4586-9843-62d31ac703c5"
-      }
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "gameoverbg": {
+      "ver": "1.0.3",
+      "uuid": "9372177a-381b-4086-8bb9-92675e45e9fd",
+      "rawTextureUuid": "370d8f3f-c4cc-4586-9843-62d31ac703c5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 505,
+      "height": 361,
+      "rawWidth": 505,
+      "rawHeight": 361,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
     }
-  ],
-  "type": 1,
-  "wrapMode": 1,
-  "filterMode": 1
+  }
 }

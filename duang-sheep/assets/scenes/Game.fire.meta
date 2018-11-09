@@ -1,6 +1,7 @@
 {
-  "__type__": "Editor.SceneMeta",
-  "ver": 0,
-  "uuid": "ad437e4f-5d19-42c1-92dd-ba90f0f40541",
-  "binary": false
+  "ver": "1.0.0",
+  "uuid": "fe633f07-3c52-4638-8573-c83efe6e6799",
+  "asyncLoadAssets": false,
+  "autoReleaseAssets": false,
+  "subMetas": {}
 }
