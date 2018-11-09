@@ -1,43 +1,44 @@
-var PipeGroupManager = Fire.Class({
-    //-- 继承
-    extends: Fire.Component,
-    //-- 构造函数
-    constructor: function () {
-        //-- 上一次创建PipeGroup的时间
-        this.lastTime = 0;
-    },
-    //-- 属性
+const PipeGroup = require("PipeGroup");
+
+cc.Class({
+    extends: cc.Component,
+
     properties: {
-        //-- 获取PipeGroup模板
-        srcPipeGroup: {
-            default: null,
-            type: Fire.Entity
-        },
-        //-- PipeGroup初始坐标
-        initPipeGroupPos: {
-            default: new Fire.Vec2(600, 0)
-        },
+        pipePrefab: cc.Prefab,
         //-- 创建PipeGroup需要的时间
-        spawnInterval: 3
+        spawnInterval: 0,
+        //-- 记录 pipe 生成位置
+        spawnX: 0,
+        //-- pipe 移动速度
+        objectSpeed: 0
+
     },
-    //-- 初始化
-    onLoad: function () {
-        this.lastTime = Fire.Time.time + 10;
+    // this is a temp script content to test the PipeGroup spwan
+    start () {
+        this.schedule(this.spawnPipe, this.spawnInterval);
     },
-    //-- 创建管道组
-    createPipeGroupEntity: function () {
-        var pipeGroup = Fire.instantiate(this.srcPipeGroup);
-        pipeGroup.parent = this.entity;
-        pipeGroup.transform.position = this.initPipeGroupPos;
-        pipeGroup.active = true;
+
+    spawnPipe () {
+        let pipe = cc.instantiate(this.pipePrefab);
+        let comp = pipe.getComponent(PipeGroup);
+
+        this.node.addChild(pipe);
+        pipe.x = this.spawnX;
+
+        return comp;
     },
-    //-- 更新
-    update: function () {
-        //-- 每过一段时间创建障碍物
-        var idleTime = Math.abs(Fire.Time.time - this.lastTime);
-        if (idleTime >= this.spawnInterval) {
-            this.lastTime = Fire.Time.time;
-            this.createPipeGroupEntity();
+
+    update (dt) {
+        var children = this.node.children;
+        let distance = dt * this.objectSpeed;
+        for (var i = 0; i < children.length; i++) {
+            var node = children[i];
+            node.x += distance;
+            var bounds = node.getBoundingBoxToWorld();
+            var disappear = bounds.xMax < 0;
+            if (disappear) {
+                node.destroy();
+            }
         }
     }
 });

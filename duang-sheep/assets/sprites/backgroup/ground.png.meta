@@ -21,8 +21,8 @@
       "height": 95,
       "rawWidth": 864,
       "rawHeight": 95,
-      "borderTop": 0,
-      "borderBottom": 0,
+      "borderTop": 50,
+      "borderBottom": 17,
       "borderLeft": 0,
       "borderRight": 0,
       "subMetas": {}
