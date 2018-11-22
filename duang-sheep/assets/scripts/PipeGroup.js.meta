@@ -1,5 +1,9 @@
 {
-  "__type__": "Editor.ScriptAssetMeta",
-  "ver": 0,
-  "uuid": "c7199979-1689-4135-90a8-826264707eee"
+  "ver": "1.0.5",
+  "uuid": "c7199979-1689-4135-90a8-826264707eee",
+  "isPlugin": false,
+  "loadPluginInWeb": true,
+  "loadPluginInNative": true,
+  "loadPluginInEditor": false,
+  "subMetas": {}
 }

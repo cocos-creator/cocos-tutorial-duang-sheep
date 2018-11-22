@@ -1,5 +1,6 @@
 {
-  "__type__": "Editor.AudioClipMeta",
-  "ver": 0,
-  "uuid": "e6a8890b-f4e1-4f7d-9a4c-5ede6070f762"
+  "ver": "2.0.0",
+  "uuid": "e6a8890b-f4e1-4f7d-9a4c-5ede6070f762",
+  "downloadMode": 0,
+  "subMetas": {}
 }

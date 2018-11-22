@@ -1,0 +1,65 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "DropEnd",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.4,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": "1",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "95646e1e-9314-4e4a-8f64-69d161b83de3"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "662c5bf6-0123-4af7-940f-9e2c7ad8720d"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "25381ff2-e44d-4400-a687-dce279cb769c"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "y": [
+        {
+          "frame": 0,
+          "value": -292.8
+        },
+        {
+          "frame": 0.3,
+          "value": -280
+        },
+        {
+          "frame": 0.4,
+          "value": -285
+        }
+      ]
+    },
+    "paths": {
+      "Collider": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": 11.8
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

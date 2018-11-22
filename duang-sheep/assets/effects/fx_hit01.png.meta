@@ -1,43 +1,31 @@
 {
-  "__type__": "Editor.TextureMeta",
-  "ver": 0,
+  "ver": "2.2.0",
   "uuid": "0f7b96ec-f644-41dc-91ee-a4df1f761d2d",
-  "subRawData": [
-    {
-      "asset": {
-        "__type__": "Fire.Sprite",
-        "_name": "fx_hit01",
-        "_objFlags": 0,
-        "pivot": {
-          "__type__": "Fire.Vec2",
-          "x": 0.5,
-          "y": 0.5
-        },
-        "trimX": 56,
-        "trimY": 57,
-        "width": 88,
-        "height": 84,
-        "texture": {
-          "__uuid__": "0f7b96ec-f644-41dc-91ee-a4df1f761d2d"
-        },
-        "rotated": false,
-        "x": 56,
-        "y": 57,
-        "rawWidth": 215,
-        "rawHeight": 186
-      },
-      "meta": {
-        "__type__": "Editor.SpriteMeta",
-        "ver": 0,
-        "uuid": "9df996e6-6509-4551-bc37-563be96c4719",
-        "atlasTag": "default",
-        "trimType": 0,
-        "trimThreshold": 1,
-        "rawTextureUuid": "0f7b96ec-f644-41dc-91ee-a4df1f761d2d"
-      }
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "fx_hit01": {
+      "ver": "1.0.3",
+      "uuid": "d354f06c-102d-466c-98ae-af158cbfd1b5",
+      "rawTextureUuid": "0f7b96ec-f644-41dc-91ee-a4df1f761d2d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -7.5,
+      "offsetY": -6,
+      "trimX": 56,
+      "trimY": 57,
+      "width": 88,
+      "height": 84,
+      "rawWidth": 215,
+      "rawHeight": 186,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
     }
-  ],
-  "type": 1,
-  "wrapMode": 1,
-  "filterMode": 1
+  }
 }
