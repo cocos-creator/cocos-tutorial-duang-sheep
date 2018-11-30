@@ -6,7 +6,7 @@
   "_duration": 0.4,
   "sample": 10,
   "speed": 1,
-  "wrapMode": "1",
+  "wrapMode": 1,
   "curveData": {
     "comps": {
       "cc.Sprite": {
@@ -14,52 +14,60 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "95646e1e-9314-4e4a-8f64-69d161b83de3"
+              "__uuid__": "588cc2aa-92ab-4454-9ff9-7c57389986db"
             }
           },
           {
             "frame": 0.2,
             "value": {
-              "__uuid__": "662c5bf6-0123-4af7-940f-9e2c7ad8720d"
+              "__uuid__": "8d392cdd-8c25-4a32-badd-e89b5f35c3d4"
             }
           },
           {
             "frame": 0.3,
             "value": {
-              "__uuid__": "25381ff2-e44d-4400-a687-dce279cb769c"
+              "__uuid__": "34734e90-5ded-4786-bd52-c7a13afae2f8"
             }
           }
         ]
       }
     },
     "props": {
-      "y": [
+      "width": [
         {
           "frame": 0,
-          "value": -292.8
+          "value": 226
+        },
+        {
+          "frame": 0.2,
+          "value": 154
         },
         {
           "frame": 0.3,
-          "value": -280
+          "value": 168
+        }
+      ],
+      "height": [
+        {
+          "frame": 0,
+          "value": 89
         },
         {
-          "frame": 0.4,
-          "value": -285
+          "frame": 0.2,
+          "value": 105
+        },
+        {
+          "frame": 0.3,
+          "value": 107
         }
       ]
-    },
-    "paths": {
-      "Collider": {
-        "props": {
-          "y": [
-            {
-              "frame": 0,
-              "value": 11.8
-            }
-          ]
-        }
-      }
     }
   },
-  "events": []
+  "events": [
+    {
+      "frame": 0.3,
+      "func": "onDropFinished",
+      "params": []
+    }
+  ]
 }

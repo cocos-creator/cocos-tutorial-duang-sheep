@@ -1,0 +1,45 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Rotate",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.5,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 22,
+  "curveData": {
+    "props": {
+      "scaleX": [
+        {
+          "frame": 0,
+          "value": 0.9
+        },
+        {
+          "frame": 0.5,
+          "value": 1.2
+        }
+      ],
+      "scaleY": [
+        {
+          "frame": 0,
+          "value": 0.9
+        },
+        {
+          "frame": 0.5,
+          "value": 1.2
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 0,
+          "value": 255
+        },
+        {
+          "frame": 0.5,
+          "value": 200
+        }
+      ]
+    }
+  },
+  "events": []
+}

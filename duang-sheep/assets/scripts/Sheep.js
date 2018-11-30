@@ -78,7 +78,7 @@ var Sheep = cc.Class({
         this._canvas = cc.find('Canvas');
 
         //-- 添加绵羊控制事件(为了注销事件缓存事件)
-        this.registeInputListener();
+        this.registeInput();
         this._energy = 1;
 
         // enter invincible state
@@ -156,12 +156,12 @@ var Sheep = cc.Class({
                 }
                 break;
             case Sheep.State.DropEnd:
-                if (this.anim.currentClip.name === 'DropEnd') {
+                if (this.anim.currentClip.name === 'DropEnd' && !this.anim.getAnimationState('DropEnd').isPlaying) {
                     this.state = State.Run;
                 }
                 break
             case Sheep.State.Dead: 
-                return;
+                break;
             default:
                 break;
         }
@@ -180,7 +180,7 @@ var Sheep = cc.Class({
         this.energyBar.progress = this._energy;
     },
 
-    //-- 更新绵羊坐标
+    //-- 更新绵羊动画
     _updateAnimation: function () {
         let animName = State[this._state];
         // temp

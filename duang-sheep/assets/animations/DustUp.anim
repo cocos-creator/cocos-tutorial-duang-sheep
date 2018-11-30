@@ -2,7 +2,7 @@
   "__type__": "cc.AnimationClip",
   "_name": "DustUp",
   "_objFlags": 0,
-  "_native": "",
+  "_rawFiles": null,
   "_duration": 0.5,
   "sample": 12,
   "speed": 1,
@@ -14,37 +14,37 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "fb8b6e04-b26b-43e5-a187-111da96b4580"
+              "__uuid__": "a508affc-5062-4a4f-8d09-adfd8bdb43ec"
             }
           },
           {
             "frame": 0.08333333333333333,
             "value": {
-              "__uuid__": "8b3dec46-b771-442c-a450-30de63bf8447"
+              "__uuid__": "3b010100-9f8b-4ff1-918b-4baa530504eb"
             }
           },
           {
             "frame": 0.16666666666666666,
             "value": {
-              "__uuid__": "655b9beb-9911-49c1-9492-4fab50c16abf"
+              "__uuid__": "bf68df09-4bb6-47e7-aefe-8e9d1308fef1"
             }
           },
           {
             "frame": 0.25,
             "value": {
-              "__uuid__": "8ca31246-7312-4ad1-ab33-8e8de37e6cbf"
+              "__uuid__": "18347791-3f74-49ea-a312-38d02d4d579d"
             }
           },
           {
             "frame": 0.3333333333333333,
             "value": {
-              "__uuid__": "ab990548-bf3c-49ab-b419-41cdc6f9bbd7"
+              "__uuid__": "58287c07-52b5-42b4-95f6-309e38dff6b5"
             }
           },
           {
             "frame": 0.4166666666666667,
             "value": {
-              "__uuid__": "e88294ff-2795-4719-94bd-78e3760d3da3"
+              "__uuid__": "3fc8fd9f-9c0a-4957-9558-3efaa9a8a112"
             }
           }
         ]

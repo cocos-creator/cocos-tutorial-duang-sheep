@@ -3,8 +3,8 @@
   "_name": "Drop",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.4166666666666667,
-  "sample": 12,
+  "_duration": 0.5,
+  "sample": 10,
   "speed": 1,
   "wrapMode": 1,
   "curveData": {
@@ -14,23 +14,53 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "c69c8828-1081-4ac4-a82b-df11518041e1"
+              "__uuid__": "98d9fbdc-0492-4095-9f3a-2a6ec79dabf0"
             }
           },
           {
-            "frame": 0.25,
+            "frame": 0.2,
             "value": {
-              "__uuid__": "a2f4476b-5b47-4ab4-8327-9a65b62ce3d8"
+              "__uuid__": "2707fbbb-ae14-4978-a600-c5ac0d19f276"
             }
           },
           {
-            "frame": 0.3333333333333333,
+            "frame": 0.4,
             "value": {
-              "__uuid__": "0c4b10b9-dfe6-4640-9103-d5540d524998"
+              "__uuid__": "a98b4f29-d6fc-473f-9267-d8424c75edfc"
             }
           }
         ]
       }
+    },
+    "props": {
+      "width": [
+        {
+          "frame": 0,
+          "value": 162
+        },
+        {
+          "frame": 0.2,
+          "value": 154
+        },
+        {
+          "frame": 0.4,
+          "value": 150
+        }
+      ],
+      "height": [
+        {
+          "frame": 0,
+          "value": 107
+        },
+        {
+          "frame": 0.2,
+          "value": 117
+        },
+        {
+          "frame": 0.4,
+          "value": 141
+        }
+      ]
     }
   },
   "events": []

@@ -63,7 +63,7 @@ cc.Class({
         this.state = State.Playing;
         this.score = 0;
         // play bgMusic
-        cc.AudioEngine.playMusic(this.gameBgAudio);
+        cc.audioEngine.playMusic(this.gameBgAudio);
         // init managers
     },
 

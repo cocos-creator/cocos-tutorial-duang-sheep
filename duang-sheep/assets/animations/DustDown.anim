@@ -2,9 +2,9 @@
   "__type__": "cc.AnimationClip",
   "_name": "DustDown",
   "_objFlags": 0,
-  "_native": "",
-  "_duration": 0.20833333333333334,
-  "sample": 24,
+  "_rawFiles": null,
+  "_duration": 0.38461538461538464,
+  "sample": 13,
   "speed": 1,
   "wrapMode": 1,
   "curveData": {
@@ -14,31 +14,31 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "e5906e92-a286-48dc-a15f-e8fa04f498fb"
+              "__uuid__": "dc55103c-6746-43ea-b060-337585593d67"
             }
           },
           {
-            "frame": 0.041666666666666664,
+            "frame": 0.07692307692307693,
             "value": {
-              "__uuid__": "3864e685-0660-4300-9c77-e5a3e59a5a43"
+              "__uuid__": "caca608e-28f6-48ed-8e45-669f30738b80"
             }
           },
           {
-            "frame": 0.08333333333333333,
+            "frame": 0.15384615384615385,
             "value": {
-              "__uuid__": "60bf070c-26c6-46a2-b5d3-f01bfa1f9569"
+              "__uuid__": "a0cb657f-e774-491f-ad0d-04ecc949c5b9"
             }
           },
           {
-            "frame": 0.125,
+            "frame": 0.23076923076923078,
             "value": {
-              "__uuid__": "c220ac8f-c3fa-4780-bccf-395232568df3"
+              "__uuid__": "f76ba673-b574-4084-85bc-7038739e52b1"
             }
           },
           {
-            "frame": 0.16666666666666666,
+            "frame": 0.3076923076923077,
             "value": {
-              "__uuid__": "de45edf3-4155-4c0b-b9c5-b7236c83b6e4"
+              "__uuid__": "fc5a558d-0a64-42c6-8c51-08b16a596b8a"
             }
           }
         ]
@@ -47,7 +47,7 @@
   },
   "events": [
     {
-      "frame": 0.20833333333333334,
+      "frame": 0.38461538461538464,
       "func": "finish",
       "params": []
     }
