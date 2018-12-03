@@ -1,6 +1,6 @@
 {
   "ver": "2.2.0",
-  "uuid": "49fbcaf1-029e-4660-927c-393004912b69",
+  "uuid": "4b70574c-8fc6-4ec2-a5b7-a7caac6cd2b8",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -8,8 +8,8 @@
   "subMetas": {
     "sheep_jump_05": {
       "ver": "1.0.3",
-      "uuid": "4d83e245-76b6-4efb-bba5-8cd75f82405d",
-      "rawTextureUuid": "49fbcaf1-029e-4660-927c-393004912b69",
+      "uuid": "0c4b10b9-dfe6-4640-9103-d5540d524998",
+      "rawTextureUuid": "4b70574c-8fc6-4ec2-a5b7-a7caac6cd2b8",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
