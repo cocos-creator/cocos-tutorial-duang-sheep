@@ -1,5 +1,4 @@
 const PipeGroup = require("PipeGroup");
-const GameManager = require('GameManager');
 
 var PipeGroupManager = cc.Class({
     extends: cc.Component,
@@ -8,48 +7,24 @@ var PipeGroupManager = cc.Class({
         pipePrefab: cc.Prefab,
         //-- 创建PipeGroup需要的时间
         spawnInterval: 0,
-        //-- 记录 pipe 生成位置
-        spawnX: 0,
         //-- pipe 移动速度
         objectSpeed: 0,
-
-        // temp prop
-        gameManager: cc.Node
-
     },
-    // this is a temp script content to test the PipeGroup spwan
-    start () {
+    onLoad () {
+        D.pipeManager = this;
+    },
+    
+    startSpawn () {
+        this.spawnPipe();
         this.schedule(this.spawnPipe, this.spawnInterval);
     },
 
     spawnPipe () {
-        let pipe = cc.instantiate(this.pipePrefab);
-        let comp = pipe.getComponent(PipeGroup);
-
-        this.node.addChild(pipe);
-        pipe.x = this.spawnX;
-
-        return comp;
+        D.spawnManager.spawn(this.pipePrefab, PipeGroup);
     },
 
-    update (dt) {
-        if (this.gameManager.getComponent('GameManager').state !== GameManager.State.Run) {
-            return;
-        }
-        var children = this.node.children;
-        let distance = dt * this.objectSpeed;
-        for (var i = 0; i < children.length; i++) {
-            var node = children[i];
-            node.x += distance;
-            var bounds = node.getBoundingBoxToWorld();
-            var disappear = bounds.xMax < 0;
-            if (disappear) {
-                node.destroy();
-            }
-        }
-    },
-
+    /*     
     reset () {
         this.unschedule(this.spawnPipe);
-    }
+    } */
 });

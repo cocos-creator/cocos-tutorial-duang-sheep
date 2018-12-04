@@ -1,34 +1,28 @@
 const Driller = require('Driller');
 
-var DirllerManager = cc.Class({
+var DrillerManager = cc.Class({
     extends: cc.Component,
 
     properties: {
-        prefab: cc.Prefab,
-        spawnInterval: 1,
-        
-        // temp prop
-        sheep: cc.Node
+        drillerPrefab: cc.Prefab,
+        spawnInterval: 1
     },
 
-    start () {
+    onLoad () {
+        D.drillerManager = this;
+    },
+
+    startSpawn () {
         this.schedule(this.spawn, this.spawnInterval);
     },
-
+    //-- 创建飞弹
     spawn () {
-        if (this.node.children.length >= 1) {
-            return;
-        } 
-        let node = cc.instantiate(this.prefab);
-        node.parent = this.node;
-
-        // temp method
-        node.x = 700;
-        let comp = node.getComponent('Driller');
-        comp.sheep = this.sheep;
+        let driller = D.spawnManager.spawn(this.drillerPrefab, Driller);
+        driller.sheep = D.sheep.node;
     },
 
+    /*     
     reset () {
         this.unschedule(this.spawn);
-    }
+    } */
 });

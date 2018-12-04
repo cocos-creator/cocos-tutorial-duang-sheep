@@ -68,33 +68,35 @@ var Sheep = cc.Class({
         // scene speed
         invincibleSpeed: -600,
         normalSpeed: -300,
-        _energy: 0,
-
-        // temp prop
-        GameManager: cc.Node
+        _energy: 0
     },
     statics: {
         State: State
     },
 
+    onLoad () {
+        D.sheep = this;
+    },
+
     //-- 初始化
     init: function () {
+        //-- 当前播放动画组件
         this.anim = this.getComponent(cc.Animation);
+        //-- 当前速度
         this.currentSpeed = 0;
         // listener to touch start 
         this._canvas = cc.find('Canvas');
-
-        //-- 添加绵羊控制事件(为了注销事件缓存事件)
-        this.registeInput();
-        this._energy = 1;
 
         // enter invincible state
         this._bindedScheduleFunc = () => {
             this.exitInvincible();
         };
+    },
 
+    startRun () {
         this.state = State.Run;
-        this.getManagerCtrl();
+        this._energy = 1;
+        this.enableInput(true);
     },
 
     registeInput () {
@@ -132,20 +134,18 @@ var Sheep = cc.Class({
             switch (group) {
                 case 'Obstacle':
                 case 'Driller':
-                    if (this.GameManager.getComponent('GameManager').supermanMode) {
+                    if (D.game.supermanMode) {
                         return;
                     }
                     if (this.invincible) {
                         return;
-                    }
-                    // 触碰障碍
-                    this.GameManager.getComponent('GameManager').gameOver();
+                    }                     
                     this.state = State.Dead;
                     this.enableInput(false);
                     break;
                 case 'NextPipe': 
                     // 穿过障碍
-                    this.GameManager.getComponent('GameManager').gainScore();
+                    D.game.gainScore();
                     break;
                 case 'Star':
                     // 进入无敌状态
@@ -178,6 +178,9 @@ var Sheep = cc.Class({
                 }
                 break;
             case Sheep.State.Dead:
+                if (this.anim.currentClip.name === 'Dead') {
+                    D.game.gameOver();
+                } 
                 return;
             default: 
                 break;
@@ -197,7 +200,7 @@ var Sheep = cc.Class({
         this.energyBar.progress = this._energy;
     },
 
-    //-- 更新绵羊播放动画
+    //-- 更新绵羊动画
     _updateAnimation: function () {
         let animName = State[this._state];
         if (this.invincible) {
@@ -220,7 +223,7 @@ var Sheep = cc.Class({
         this.unschedule(this._bindedScheduleFunc);
         var timeScale = this.invincibleSpeed / this.normalSpeed;
         // 提高场景内物体的移动速度
-        this.increaseSceneSpeed();
+        D.spawnManager.objectSpeed = this.invincibleSpeed;
         this.scheduleOnce(this._bindedScheduleFunc, this.invincibleTime * timeScale);
         // 无敌后，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
         cc.director.getScheduler().setTimeScale(timeScale);
@@ -230,7 +233,7 @@ var Sheep = cc.Class({
         this.invincible = false;
         this._updateAnimation();
         // 还原场景内物体的移动速度
-        this.slowDownSceneSpeed();
+        D.spawnManager.objectSpeed = this.normalSpeed;
         // 还原之前的设置，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
         cc.director.getScheduler().setTimeScale(1.0);
     },
@@ -249,31 +252,14 @@ var Sheep = cc.Class({
             cc.audioEngine.playEffect(this.jumpAudio);
         }
         else {
-            cc.audioEngine.playEffect(this.GameManager.getComponent('GameManager').dieAudio);
+            cc.audioEngine.playEffect(D.game.dieAudio);
         }
     },
 
     spawnDust (animName) {
-        let dust = cc.instantiate(this.dustPrefab).getComponent(Dust);
-        dust.node.parent = this.node;
+        let dustType = 'Dust';
+        let dust = D.spawnManager.spawn(this.dustPrefab, dustType, this.node);
+        dust.node.position = cc.v2(0, -20);
         dust.playAnim(animName);
-    },
-
-
-    // temp method to change the stuff speed
-    getManagerCtrl () {
-        let gameManager = this.GameManager.getComponent('GameManager');
-        this.starManager = gameManager.starManager.getComponent('StarManager');
-        this.pipeManager = gameManager.pipeManager.getComponent('PipeGroupManager');
-    },
-
-    increaseSceneSpeed () {
-        this.starManager.objectSpeed = this.invincibleSpeed;
-        this.pipeManager.objectSpeed = this.invincibleSpeed;
-    },
-
-    slowDownSceneSpeed () {
-        this.starManager.objectSpeed = this.normalSpeed;
-        this.pipeManager.objectSpeed = this.normalSpeed;
     }
 });

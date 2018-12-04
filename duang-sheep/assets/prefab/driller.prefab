@@ -134,7 +134,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "velocity": 400,
+    "velocity": 300,
     "angleVelocity": 15,
     "sheep": null,
     "_id": ""

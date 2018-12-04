@@ -1,4 +1,4 @@
-const Sheep = require('./Sheep');
+const Sheep = require('Sheep');
 
 var State = cc.Enum({
     Menu: 1,
@@ -10,7 +10,6 @@ var GameManager = cc.Class({
     extends: cc.Component,
 
     properties: {
-        //-- 获取绵羊
         sheep: Sheep,
         //-- 获取gameOverMenu对象
         gameOverMenu: cc.Node,
@@ -37,15 +36,13 @@ var GameManager = cc.Class({
             type: cc.AudioClip
         },
 
+        //-- 游戏结束算分
+        gameOverScoreLabel: cc.Label,
+
         supermanMode: {
             default: false,
             tooltip: '无敌模式, 方便测试地图'
-        },
-
-        // temp prop
-        pipeManager: cc.Node,
-        drillerManager: cc.Node,
-        starManager: cc.Node
+        }
     },
 
     statics: {
@@ -53,44 +50,64 @@ var GameManager = cc.Class({
     },
 
     onLoad () {
+        D.GameManager = GameManager;
+        D.game = this;
+
+        this.sheep.init();
+        // activate colliders
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
-
-        // init the game
+        //-- 游戏状态
         this.state = State.Menu;
+        //-- 分数
         this.score = 0;
         this.scoreText.string = this.score;
         this.gameOverMenu.active = false;
-        this.sheep.init();
+        // resume the game loop
+        cc.director.resume();
     },
-
+    
+    //-- 开始
     start () {
         this.state = State.Run;
         this.score = 0;
-        // play bgMusic
         cc.audioEngine.playMusic(this.gameBgAudio);
-
+        // start running
+        D.sheep.startRun();
+        // start spawn obstacle
+        D.spawnManager.startSpawn();
     },
 
+    //-- 背景音效停止，死亡音效播放
     gameOver () {
-        // stop the running
         this.state = State.Over;
-        // temp method
-        this.pipeManager.getComponent('PipeGroupManager').reset();
-        this.drillerManager.getComponent('DrillerManager').reset();
-        this.starManager.getComponent('StarManager').reset();
+        cc.director.pause();
+    /*      
+        // stop spwan
+        D.pipeManager.reset();
+        D.starManager.reset();
+        D.drillerManager.reset();
         // stop audio
         cc.audioEngine.stopMusic();
         cc.audioEngine.stopEffect(this.dieAudio);
-        cc.audioEngine.stopEffect(this.gameOverAudio);
+        cc.audioEngine.stopEffect(this.gameOverAudio); 
+    */
         this.gameOverMenu.active = true;
-        this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;
+        this.gameOverScoreLabel.string = this.score;
     },
-    // update the score
+
+    //-- 更新分数
     gainScore () {
+        //-- 分数+1
         this.score++;
         this.scoreText.string = this.score;
+        //-- 分数增加音效
         cc.audioEngine.playEffect(this.scoreAudio);
+    },
+
+    //-- 重新开始游戏
+    restart: function () {
+        cc.director.loadScene('Game');
     }
 });
 

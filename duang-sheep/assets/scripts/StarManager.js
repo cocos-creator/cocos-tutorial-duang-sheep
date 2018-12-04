@@ -1,4 +1,4 @@
-const GameManager = require('GameManager');
+const Star = require('Star');
 
 cc.Class({
     extends: cc.Component,
@@ -10,31 +10,17 @@ cc.Class({
             default: 0.1,
             tooltip: '生成星星的概率'
         },
-
+        spawnY: 0,
         // temp prop, star 的移动速度
-        objectSpeed: 0,
-        gameManager: cc.Node
+        objectSpeed: 0
     },
 
-    start () {
-        this.schedule(this.spawn, this.spawnInterval / 2);
+    onLoad () {
+        D.starManager = this;
     },
-    // temp method
-    update (dt) {
-        if (this.gameManager.getComponent('GameManager').state !== GameManager.State.Run) {
-            return;
-        }
-        var children = this.node.children;
-        let distance = dt * this.objectSpeed;
-        for (var i = 0; i < children.length; i++) {
-            var node = children[i];
-            node.x += distance;
-            var bounds = node.getBoundingBoxToWorld();
-            var disappear = bounds.xMax < 0;
-            if (disappear) {
-                node.destroy();
-            }
-        }
+
+    startSpawn () {
+        this.schedule(this.spawn, this.spawnInterval / 2);
     },
 
     spawn () {
@@ -42,13 +28,13 @@ cc.Class({
             return;
         }
 
-        let star = cc.instantiate(this.starPrefab);
-        star.parent = this.node;
-        star.x = 700;
-        star.y = -270 + Math.random() * (325 + 270);
+        let star = D.spawnManager.spawn(this.starPrefab, Star);
+        star.node.y = Math.random() * (325 + this.spawnY) - this.spawnY;
     },
 
+    /*  
     reset () {
         this.unschedule(this.spawn);
-    }
+    } 
+    */
 });
