@@ -78,7 +78,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "_zIndex": 0,
-    "groupIndex": 0,
+    "groupIndex": 2,
     "_id": ""
   },
   {
@@ -369,8 +369,8 @@
     },
     "spacingRange": {
       "__type__": "cc.Vec2",
-      "x": 200,
-      "y": 375
+      "x": 300,
+      "y": 450
     },
     "topPipe": {
       "__id__": 2
