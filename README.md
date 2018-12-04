@@ -1,6 +1,6 @@
 # tutorial
-tutorial repo step2.  
+tutorial repo step3.  
 
 ## Introduction 
-This branch is designed for Creator v2.0.
-If you prefer to use Creator below v2.0, please switch branches to: [1.x branch](https://github.com/cocos-creator/tutorial-duang-sheep/tree/a193f1ce2f2fb38a601912e0cc5714d4c7550b37)
+This branch is designed for Creator v2.0.5 or higher version.
+If you prefer to use Creator below v2.0, please switch branches to: [1.x branch](https://github.com/cocos-creator/tutorial-duang-sheep/tree/2156b498fd63e4ba089d6eaf5351a3092752c0f8)

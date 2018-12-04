@@ -1,7 +1,7 @@
 ## Duang Sheep项目介绍:
 
 这是一个类似 flappy bird 的小游戏，主人公为一只会飞的绵羊。玩家可以通过点击屏幕操作绵羊进行跳跃避免绵羊撞上障碍物,
-越过一个障碍物可得一分，最后看看谁得到的分数最多。
+越过一个障碍物可得一分，最后看看谁得到的分数最多。<br>
 
 __游戏完成图：__ <br>
 ![GameComplete_Capture](./res/complete.png)
@@ -9,60 +9,36 @@ __游戏完成图：__ <br>
 ---
 ## Git路径:
 
-  >基础项目（资源）: https://github.com/cocos-creator/tutorial-duang-sheep/tree/step-1<br>
-  >完整项目 （资源 or 脚本）: https://github.com/cocos-creator/tutorial-duang-sheep/tree/master<br>
+  >基础项目（资源）： https://github.com/cocos-creator/tutorial-duang-sheep/tree/step-1<br>
+  >完整项目（资源 or 脚本）： https://github.com/cocos-creator/tutorial-duang-sheep/tree/master<br>
   
 ---
-在上一步 Step1 中我们导入了整个项目需要的基本资源，接下来我们就要开始学习整个游戏项目的制作了。怀着激动的心情，我先来讲述一下这个教程的进阶流程以及你需要的前期准备工作。
-首先，整个项目是按照循序渐进的模式逐步加大教学难度，如果你是 __未接触过__ creator 的新手，请务必按照每一步的流程 __成功跑通__ 之后再进行下一步的学习，避免囫囵吞枣和急功近利，若是在学习过程中发现实在晦涩难懂建议从更加初级的 __[小星星](https://docs.cocos.com/creator/manual/zh/getting-started/quick-start.html)__ 教程入手。<br>
-其次，每一步的教学内容都会附带一个教学重心点，整个流程会告诉你 creator 现有的 __大部分基础组件__ 的使用方法，希望通过完成这些教程内容，能够帮助你快速入门 creator。<br>
+### Step3:
+在上一步 __step2__ 中我们成功的搭建了简单的场景，同时也完成了场景的滚动播放并产生小绵羊似乎正在移动的效果。在这一步中我们进行障碍物的生成。<br>
 
-在学习之前你最好需要具备以下几种技能，基础的 __JS__ 编写能力，基本的游戏设计理念，基本的 __程序框架设计__ 能力，__重构__ 的概念，耐心，细心和决心。
+__本章重点:__ <br>
+创建 PipePrefab，并且创建一个生成器用于生产 Pipe 作为障碍物。
+如果你对 [Prefab](https://docs.cocos.com/creator/manual/zh/asset-workflow/prefab.html) 有什么不了解，可以到到官网的手册中查看详细信息。<br>
+1. 首先在资源管理器新建两个我们需要的脚本：__PipeGroup.js，PipeGroupManager.js__ （脚本内容详见工程文件夹）。
+- PipeGroup: 用于控制 Pipe 位置。正如完成图中展示的，上下管道的位置是会随意生成的。
+  ```
+  // 控制生成新的 Pipe 时，上下管道位置与空隙
+      onEnable () {
+        let botYPos = this.botYRange.x + Math.random() * (this.botYRange.y - this.botYRange.x);
+        let space = this.spacingRange.x + Math.random() * (this.spacingRange.y - this.spacingRange.x);
+        let topYPos = botYPos + space;
+        this.topPipe.y = topYPos;
+        this.botPipe.y = botYPos;
+    }
+  ```
+- PipeGroupManager: 用于控制 PipeGroup 的生成，目前暂时先这样设定，到了后续我们将会对生成器脚本采取更加合理的管控方式。但是饭要一口口吃，我们先让这个画面的 barrier 机制运行起来！<br>
+2. 场景内右键重新创建一个节点命名为 pipeLayer 作为 PipeGroup 的父节点，将 PipeGroupManager.js 绑定上去。<br>
+3. 如图中创建相同，在当前游戏场景中按照如上节点树创建好对象之后，将 node 从节点树拖拽到资源管理器中的 Prefab 文件夹下（如果你没有 prefab 文件夹，记得新建哦）。
+  ![dragPrefab](./res/dragPrefab.gif)<br>
+4. 记得给父子节点绑定如图中显示对应的 BoxCollider（详细数值可以参考一下工程内设定）。
+![PipeGroupPrefab](./res/pipeGroup.png) <br>
+5. 预览场景，反复检测 bug 至场景正常运行且无报错。<br>
+   ![SpawnPipe](./res/spawnPipe.gif)
 
-### Step2:
-
-__本章重点：__
-场景制作，自定义脚本编写以及节点绑定自定义脚本。
-这一节我们只构建好初始的场景并且实现一个简单的功能——场景的滚动播放。
-
-1. 在资源管理器内单机右键创建新场景并命名为 Game。
-   布置场景，创建几个基本节点如图：
-   ![nodeTree1](./res/nodeTree1.png) <br>
-   bgBlue 和 bgBrown 是 __Sprite__ 组件(纯色)节点。<br>
-   你可以通过修改 Node 组件上方 Color 属性改变 Sprite 的显示颜色。
-   ![bgBlue](./res/bgBlue.png)<br>
-   初始化后场景如下图（详细配置参照项目工程）。
-![initScene](./res/initScene.png)<br>
-
-2. 基本场景创建完成之后，我们添加两个新的组合节点，sky 和 ground，它们两个包含对应名称的 sprite 节点对象。
-   ![nodeTree2](./res/nodeTree2.png)<br>
-   ![groupScene](./res/scene.png)<br>
-3. 场景创建完毕，我们需要在资源管理器内单击右键，创建一个新的 JavaScript 脚本，命名为 ScrollPicture，脚本内容如下。
-```
-    var ScrollPicture = cc.Class({
-        //-- 继承
-        extends: cc.Component,
-        //-- 属性
-        properties: {
-            //-- 滚动的速度
-            speed:200,
-            //-- X轴边缘
-            resetX: 0
-        },
-        //-- 更新
-        update: function (dt) {
-            this.node.x += dt * this.speed;
-            if (this.node.x < this.resetX) {
-                this.node.x -= this.resetX;
-            }
-        }
-    });
-```  
-   如果对里面的脚本内容设置不够了解的话，建议参考: [脚本开发指南](https://docs.cocos.com/creator/manual/zh/scripting/)。
-   这个脚本功能是用于控制背景画面的移动，我们需要将它从资源管理器中拖拽脚本对象绑定到 sky 和 ground 这两个父节点上。<br>
-![dragComponent](./res/drag.gif)<br>
-4. 将 ScrollPicture.js 绑定到对应父节点上，并且按照合适的速度调整地面移动速度，最后我们算是初步完成了场景的搭建任务。<br>
-![finishScene](./res/finish.gif)
-<br>
-
-- Step3: https://github.com/cocos-creator/tutorial-duang-sheep/tree/step-3
+- Step2: https://github.com/cocos-creator/tutorial-duang-sheep/tree/step-2
+- Step4: https://github.com/cocos-creator/tutorial-duang-sheep/tree/step-4
