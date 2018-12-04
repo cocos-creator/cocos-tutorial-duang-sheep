@@ -20,22 +20,27 @@ var GameManager = cc.Class({
         //-- 获取背景音效
         gameBgAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         //-- 获取死亡音效
         dieAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         //-- 获取失败音效
         gameOverAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         //-- 获取得分音效
         scoreAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
+        },
+
+        supermanMode: {
+            default: false,
+            tooltip: '无敌模式, 方便测试地图'
         }
     },
 
@@ -62,15 +67,20 @@ var GameManager = cc.Class({
     start () {
         this.state = State.Run;
         this.score = 0;
+        cc.audioEngine.playMusic(this.gameBgAudio);
         D.pipeManager.startSpawn();
+        D.starManager.start();
+        D.drillerManager.start();
         this.sheep.startRun();
     },
     gameOver () {
         //-- 背景音效停止，死亡音效播放
-        cc.audioEngine.stopMusic(this.gameBgAudio);
+        cc.audioEngine.stopMusic();
         cc.audioEngine.playEffect(this.dieAudio);
         cc.audioEngine.playEffect(this.gameOverAudio);
         D.pipeManager.reset();
+        D.starManager.reset();
+        D.drillerManager.reset();
         this.state = State.Over;
         this.gameOverMenu.active = true;
         this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;

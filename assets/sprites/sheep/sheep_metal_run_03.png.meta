@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "f65095d1-68d2-41c8-8a67-ff582e90cde8",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "sheep_metal_run_03": {
+      "ver": "1.0.3",
+      "uuid": "a30b2e06-9612-4847-bb9b-51676dce9d68",
+      "rawTextureUuid": "f65095d1-68d2-41c8-8a67-ff582e90cde8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -5,
+      "offsetY": 12,
+      "trimX": 29,
+      "trimY": 1,
+      "width": 160,
+      "height": 133,
+      "rawWidth": 228,
+      "rawHeight": 159,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

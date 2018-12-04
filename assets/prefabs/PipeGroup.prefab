@@ -55,7 +55,6 @@
     "_globalZOrder": 0,
     "_tag": -1,
     "_opacityModifyRGB": false,
-    "_reorderChildDirty": false,
     "_id": "",
     "_active": true,
     "_components": [
@@ -113,7 +112,6 @@
     "_globalZOrder": 0,
     "_tag": -1,
     "_opacityModifyRGB": false,
-    "_reorderChildDirty": false,
     "_id": "",
     "_active": true,
     "_components": [
@@ -227,7 +225,6 @@
     "_globalZOrder": 0,
     "_tag": -1,
     "_opacityModifyRGB": false,
-    "_reorderChildDirty": false,
     "_id": "",
     "_active": true,
     "_components": [
@@ -307,8 +304,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "speed": -300,
-    "resetX": -600,
     "botYRange": {
       "__type__": "cc.Vec2",
       "x": -270,

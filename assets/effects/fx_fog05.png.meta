@@ -1,9 +1,10 @@
 {
-  "ver": "1.0.0",
+  "ver": "2.2.0",
   "uuid": "7fe725d8-e77e-4401-ba55-9a336ae2f3d7",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "fx_fog05": {
       "ver": "1.0.3",
@@ -12,11 +13,11 @@
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
-      "offsetX": -6,
+      "offsetX": -6.5,
       "offsetY": 7,
-      "trimX": 63,
+      "trimX": 62,
       "trimY": 25,
-      "width": 203,
+      "width": 204,
       "height": 97,
       "rawWidth": 341,
       "rawHeight": 161,
