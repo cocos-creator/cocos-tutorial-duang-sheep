@@ -1,43 +1,31 @@
 {
-  "__type__": "Editor.TextureMeta",
-  "ver": 0,
-  "uuid": "e2917f50-7029-466f-bb51-79739398b5d2",
-  "subRawData": [
-    {
-      "asset": {
-        "__type__": "Fire.Sprite",
-        "_name": "sheep_jump_04",
-        "_objFlags": 0,
-        "pivot": {
-          "__type__": "Fire.Vec2",
-          "x": 0.5,
-          "y": 0.5
-        },
-        "trimX": 26,
-        "trimY": 24,
-        "width": 152,
-        "height": 115,
-        "texture": {
-          "__uuid__": "e2917f50-7029-466f-bb51-79739398b5d2"
-        },
-        "rotated": false,
-        "x": 26,
-        "y": 24,
-        "rawWidth": 228,
-        "rawHeight": 159
-      },
-      "meta": {
-        "__type__": "Editor.SpriteMeta",
-        "ver": 0,
-        "uuid": "03828cd9-d94d-49f2-9847-571d02ef29a8",
-        "atlasTag": "default",
-        "trimType": 0,
-        "trimThreshold": 1,
-        "rawTextureUuid": "e2917f50-7029-466f-bb51-79739398b5d2"
-      }
+  "ver": "2.2.0",
+  "uuid": "6ea14694-a6ba-401e-a5b8-17a74945ed13",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "sheep_jump_04": {
+      "ver": "1.0.3",
+      "uuid": "a2f4476b-5b47-4ab4-8327-9a65b62ce3d8",
+      "rawTextureUuid": "6ea14694-a6ba-401e-a5b8-17a74945ed13",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -12,
+      "offsetY": -2,
+      "trimX": 26,
+      "trimY": 24,
+      "width": 152,
+      "height": 115,
+      "rawWidth": 228,
+      "rawHeight": 159,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
     }
-  ],
-  "type": 1,
-  "wrapMode": 1,
-  "filterMode": 1
+  }
 }

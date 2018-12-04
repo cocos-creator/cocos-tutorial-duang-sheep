@@ -1,73 +1,93 @@
-var Sheep = require('Sheep');
-var ScrollPicture = require('ScrollPicture');
-var PipeGroupManager = require('PipeGroupManager');
+const Sheep = require('./Sheep');
 
-var GameState = Fire.defineEnum({
-    Run : -1,
-    Over: -1
+var State = cc.Enum({
+    Menu: 1,
+    Run: 1 << 1,
+    Over: 1 << 2
 });
 
-var GameManager = Fire.Class({
-    //-- 继承
-    extends: Fire.Component,
-    //-- 构造函数
-    constructor: function () {
-        //-- 游戏状态
-        this.gameState = GameState.Run
-    },
-    //-- 属性
+var GameManager = cc.Class({
+    extends: cc.Component,
+
     properties: {
         //-- 获取绵羊
-        sheep: {
-            default: null,
-            type: Sheep
-        },
-        //-- 获取背景
-        background: {
-            default: null,
-            type: ScrollPicture
-        },
-        //-- 获取地面
-        ground: {
-            default: null,
-            type: ScrollPicture
-        },
-        //-- 获取障碍物管理
-        pipeGroupMgr: {
-            default: null,
-            type: PipeGroupManager
-        },
+        sheep: Sheep,
         //-- 获取gameOverMenu对象
-        gameOverMenu: {
+        gameOverMenu: cc.Node,
+        //-- 获取分数对象
+        scoreText: cc.Label,    
+        //-- 获取背景音效
+        gameBgAudio: {
+           default: null,
+           type: cc.AudioClip
+        },
+        //-- 获取死亡音效
+        dieAudio: {
             default: null,
-            type: Fire.Entity
-        }
+            type: cc.AudioClip
+        },
+        //-- 获取失败音效
+        gameOverAudio: {
+            default: null,
+            type: cc.AudioClip
+        },
+        //-- 获取得分音效
+        scoreAudio: {
+            default: null,
+            type: cc.AudioClip
+        },
+
+        supermanMode: {
+            default: false,
+            tooltip: '无敌模式, 方便测试地图'
+        },
+
+        // temp prop
+        pipeManager: cc.Node,
+        drillerManager: cc.Node
     },
-    //-- 开始
-    start: function () {
-        this.gameState = GameState.Run;
+
+    statics: {
+        State
     },
-    //-- 更新
-    update: function () {
-        switch (this.gameState) {
-            case GameState.Run:
-                var sheepRect = this.sheep.renderer.getWorldBounds();
-                var gameOver = this.pipeGroupMgr.collisionDetection(sheepRect);
-                if (gameOver) {
-                    this.gameState = GameState.Over;
-                    this.sheep.state = Sheep.State.Dead;
-                    this.ground.enabled = false;
-                    this.background.enabled = false;
-                    for (var i = 0; i < this.pipeGroupMgr.pipeGroupList.length; ++i) {
-                        var pipeGroup = this.pipeGroupMgr.pipeGroupList[i].getComponent('PipeGroup');
-                        pipeGroup.enabled = false;
-                    }
-                    this.pipeGroupMgr.enabled = false;
-                    this.gameOverMenu.active = true;
-                }
-                break;
-            default :
-                break;
-        }
+
+    onLoad () {
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
+
+        // init the game
+        this.state = State.Menu;
+        this.score = 0;
+        this.scoreText.string = this.score;
+        this.gameOverMenu.active = false;
+        this.sheep.init();
+    },
+
+    start () {
+        this.state = State.Run;
+        this.score = 0;
+        // play bgMusic
+        cc.audioEngine.playMusic(this.gameBgAudio);
+
+    },
+
+    gameOver () {
+        // stop the running
+        this.state = State.Over;
+        this.pipeManager.getComponent('PipeGroupManager').reset();
+        this.drillerManager.getComponent('DrillerManager').reset();
+        cc.audioEngine.stopMusic();
+        cc.audioEngine.stopEffect(this.dieAudio);
+        cc.audioEngine.stopEffect(this.gameOverAudio);
+        this.gameOverMenu.active = true;
+        this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;
+    },
+    // update the score
+    gainScore () {
+        this.score++;
+        this.scoreText.string = this.score;
+        cc.audioEngine.playEffect(this.scoreAudio);
     }
 });
+
+module.export = GameManager;
