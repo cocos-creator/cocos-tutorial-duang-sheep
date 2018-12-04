@@ -16,6 +16,9 @@ var DirllerManager = cc.Class({
     },
 
     spawn () {
+        if (this.node.children.length >= 1) {
+            return;
+        } 
         let node = cc.instantiate(this.prefab);
         node.parent = this.node;
 

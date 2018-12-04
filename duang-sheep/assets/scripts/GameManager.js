@@ -44,7 +44,8 @@ var GameManager = cc.Class({
 
         // temp prop
         pipeManager: cc.Node,
-        drillerManager: cc.Node
+        drillerManager: cc.Node,
+        starManager: cc.Node
     },
 
     statics: {
@@ -74,8 +75,11 @@ var GameManager = cc.Class({
     gameOver () {
         // stop the running
         this.state = State.Over;
+        // temp method
         this.pipeManager.getComponent('PipeGroupManager').reset();
         this.drillerManager.getComponent('DrillerManager').reset();
+        this.starManager.getComponent('StarManager').reset();
+        // stop audio
         cc.audioEngine.stopMusic();
         cc.audioEngine.stopEffect(this.dieAudio);
         cc.audioEngine.stopEffect(this.gameOverAudio);

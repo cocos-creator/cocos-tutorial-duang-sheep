@@ -41,6 +41,7 @@ cc.Class({
         // move forward
         var speed = getDir(this.node).mul(this.velocity * dt);
         this.node.position = selfPos.add(speed);
+        
         // destroy this node
         if (this.node.x < -700) {
             this.node.removeFromParent();

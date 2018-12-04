@@ -94,6 +94,7 @@ var Sheep = cc.Class({
         };
 
         this.state = State.Run;
+        this.getManagerCtrl();
     },
 
     registeInput () {
@@ -131,15 +132,24 @@ var Sheep = cc.Class({
             switch (group) {
                 case 'Obstacle':
                 case 'Driller':
+                    if (this.GameManager.getComponent('GameManager').supermanMode) {
+                        return;
+                    }
+                    if (this.invincible) {
+                        return;
+                    }
+                    // 触碰障碍
                     this.GameManager.getComponent('GameManager').gameOver();
                     this.state = State.Dead;
                     this.enableInput(false);
                     break;
                 case 'NextPipe': 
+                    // 穿过障碍
                     this.GameManager.getComponent('GameManager').gainScore();
                     break;
                 case 'Star':
-                    // invincible
+                    // 进入无敌状态
+                    this.enterInvincible();
                     break;
                 default: 
                     break;
@@ -187,9 +197,17 @@ var Sheep = cc.Class({
         this.energyBar.progress = this._energy;
     },
 
-    //-- 更新绵羊坐标
+    //-- 更新绵羊播放动画
     _updateAnimation: function () {
         let animName = State[this._state];
+        if (this.invincible) {
+            let invincibleAnimName = 'Run_invincible';
+            var hasInvincibleAnim = this.anim.getAnimationState(invincibleAnimName);
+            if (!hasInvincibleAnim) {
+                cc.error('Lack of invincible animation');
+            }
+            animName = invincibleAnimName;
+        }
         // temp
         this.anim.stop();
         this.anim.play(animName);
@@ -197,11 +215,24 @@ var Sheep = cc.Class({
 
     // Invincible 
     enterInvincible () {
-
+        this.invincible = true;
+        this._updateAnimation();
+        this.unschedule(this._bindedScheduleFunc);
+        var timeScale = this.invincibleSpeed / this.normalSpeed;
+        // 提高场景内物体的移动速度
+        this.increaseSceneSpeed();
+        this.scheduleOnce(this._bindedScheduleFunc, this.invincibleTime * timeScale);
+        // 无敌后，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
+        cc.director.getScheduler().setTimeScale(timeScale);
     },
 
     exitInvincible () {
-
+        this.invincible = false;
+        this._updateAnimation();
+        // 还原场景内物体的移动速度
+        this.slowDownSceneSpeed();
+        // 还原之前的设置，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
+        cc.director.getScheduler().setTimeScale(1.0);
     },
 
     //-- 开始跳跃设置状态数据，播放动画
@@ -226,5 +257,23 @@ var Sheep = cc.Class({
         let dust = cc.instantiate(this.dustPrefab).getComponent(Dust);
         dust.node.parent = this.node;
         dust.playAnim(animName);
+    },
+
+
+    // temp method to change the stuff speed
+    getManagerCtrl () {
+        let gameManager = this.GameManager.getComponent('GameManager');
+        this.starManager = gameManager.starManager.getComponent('StarManager');
+        this.pipeManager = gameManager.pipeManager.getComponent('PipeGroupManager');
+    },
+
+    increaseSceneSpeed () {
+        this.starManager.objectSpeed = this.invincibleSpeed;
+        this.pipeManager.objectSpeed = this.invincibleSpeed;
+    },
+
+    slowDownSceneSpeed () {
+        this.starManager.objectSpeed = this.normalSpeed;
+        this.pipeManager.objectSpeed = this.normalSpeed;
     }
 });
