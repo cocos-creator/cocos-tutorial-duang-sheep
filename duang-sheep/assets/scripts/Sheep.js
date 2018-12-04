@@ -1,5 +1,7 @@
+const Dust = require('./Dust');
+
 //-- 绵羊状态
-var State = Fire.defineEnum({
+var State = cc.Enum({
     None   : -1,
     Run    : -1,
     Jump   : -1,
@@ -8,20 +10,10 @@ var State = Fire.defineEnum({
     Dead   : -1
 });
 
-var Sheep = Fire.Class({
+var Sheep = cc.Class({
     //-- 继承
-    extends: Fire.Component,
-    //-- 构造函数
-    constructor: function () {
-        //-- 当前播放动画组件
-        this.anim = null;
-        //-- 当前速度
-        this.currentSpeed = 0;
-        //-- 绵羊图片渲染
-        this.renderer = null;
-        //-- 跳跃事件
-        this.jumpEvent = null;
-    },
+    extends: cc.Component,
+
     //-- 属性
     properties: {
         //-- Y轴最大高度
@@ -31,10 +23,10 @@ var Sheep = Fire.Class({
         //-- 重力
         gravity: 9.8,
         //-- 起跳速度
-        initSpeed: 500,
+        initJumpSpeed: 500,
         //-- 绵羊状态
         _state: {
-            default: State.Run,
+            default: State.None,
             type: State,
             visible: false
         },
@@ -46,44 +38,127 @@ var Sheep = Fire.Class({
                 if (value !== this._state) {
                     this._state = value;
                     if (this._state !== State.None) {
-                        var animName = State[this._state];
-                        this.anim.play(animName);
+                        this._updateAnimation();
                     }
                 }
             },
             type: State
         },
-        //-- 获取Jump音效
         jumpAudio: {
             default: null,
-            type: Fire.AudioSource
+            type: cc.AudioClip
+        },
+
+        dustPrefab: cc.Prefab,
+
+        addEnergyOnGroup: {
+            default: 0.5,
+            tooltip: '每秒在地上恢复的能量值'
+        },
+
+        jumpEnergyCost: {
+            default: 0.25,
+            tooltip: '每次跳跃消耗能量值'
+        },
+
+        energyBar: cc.ProgressBar,
+        // 无敌状态
+        invincible: false,
+        invincibleTime: 3,
+        // scene speed
+        invincibleSpeed: -600,
+        normalSpeed: -300,
+        _energy: 0
+    },
+    statics: {
+        State: State
+    },
+
+    onLoad () {
+        D.sheep = this;
+    },
+
+    //-- 初始化
+    init: function () {
+        //-- 当前播放动画组件
+        this.anim = this.getComponent(cc.Animation);
+        //-- 当前速度
+        this.currentSpeed = 0;
+        // listener to touch start 
+        this._canvas = cc.find('Canvas');
+
+        // enter invincible state
+        this._bindedScheduleFunc = () => {
+            this.exitInvincible();
+        };
+    },
+
+    startRun () {
+        this.state = State.Run;
+        this._energy = 1;
+        this.enableInput(true);
+    },
+
+    registeInput () {
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, () => {
+            this.jump();
+        });
+        
+        this._canvas.on(cc.Node.EventType.TOUCH_START, () => {
+            this.jump();
+        });
+    },
+
+    cancelInput () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN);
+        this._canvas.off(cc.Node.EventType.TOUCH_START);
+    },
+
+    enableInput (enable) {
+        if (enable) {
+            this.registeInput()
+        }
+        else {
+            this.cancelInput();
         }
     },
-    //-- 初始化
-    onLoad: function () {
-        this.anim = this.getComponent(Fire.SpriteAnimation);
-        this.renderer = this.getComponent(Fire.SpriteRenderer);
 
-        //-- 添加绵羊控制事件(为了注销事件缓存事件)
-        this.jumpEvent = function (event) {
-            if (this.state !== State.Dead) {
-                this._jump();
-            }
-        }.bind(this);
-        Fire.Input.on('mousedown', this.jumpEvent);
-    },
-    //-- 删除
-    onDestroy: function () {
-        //-- 注销绵羊控制事件
-        Fire.Input.off('mousedown', this.jumpEvent);
-    },
     //-- 更新
-    update: function () {
-        this._updateState();
-        this._updateTransform();
+    update: function (dt) {
+        this._updateState(dt);
     },
+
+    onCollisionEnter (other) {
+        if (this.state !== State.Dead) {
+            let group = cc.game.groupList[other.node.groupIndex];
+            switch (group) {
+                case 'Obstacle':
+                case 'Driller':
+                    if (D.game.supermanMode) {
+                        return;
+                    }
+                    if (this.invincible) {
+                        return;
+                    }                     
+                    this.state = State.Dead;
+                    this.enableInput(false);
+                    break;
+                case 'NextPipe': 
+                    // 穿过障碍
+                    D.game.gainScore();
+                    break;
+                case 'Star':
+                    // 进入无敌状态
+                    this.enterInvincible();
+                    break;
+                default: 
+                    break;
+            }
+        }
+    },
+
     //-- 更新绵羊状态
-    _updateState: function () {
+    _updateState: function (dt) {
         switch (this.state) {
             case Sheep.State.Jump:
                 if (this.currentSpeed < 0) {
@@ -91,37 +166,100 @@ var Sheep = Fire.Class({
                 }
                 break;
             case Sheep.State.Drop:
-                if (this.transform.y <= this.groundY) {
-                    this.transform.y = this.groundY;
+                if (this.node.y <= this.groundY) {
+                    this.node.y = this.groundY;
                     this.state = State.DropEnd;
+                    this.spawnDust('DustDown');
                 }
                 break;
             case Sheep.State.DropEnd:
-                if (!this.anim.isPlaying('dropEnd')) {
+                if (this.anim.currentClip.name === 'DropEnd' && !this.anim.getAnimationState('DropEnd').isPlaying) {
                     this.state = State.Run;
                 }
-                break
-            default:
+                break;
+            case Sheep.State.Dead:
+                if (this.anim.currentClip.name === 'Dead') {
+                    D.game.gameOver();
+                } 
+                return;
+            default: 
                 break;
         }
-    },
-    //-- 更新绵羊坐标
-    _updateTransform: function () {
-        var flying = this.state === Sheep.State.Jump || this.transform.y > this.groundY;
+        let flying = this.state === State.Jump || this.node.y > this.groundY;
+
         if (flying) {
-            this.currentSpeed -= (Fire.Time.deltaTime * 100) * this.gravity;
-            this.transform.y += Fire.Time.deltaTime * this.currentSpeed;
+            this.currentSpeed -= dt * this.gravity;
+            this.node.y += dt * this.currentSpeed;
+        }
+        else {
+            this._energy += this.addEnergyOnGroup * dt;
+        }
+
+        // update energy
+        this._energy = cc.misc.clamp01(this._energy);
+        this.energyBar.progress = this._energy;
+    },
+
+    //-- 更新绵羊动画
+    _updateAnimation: function () {
+        let animName = State[this._state];
+        if (this.invincible) {
+            let invincibleAnimName = 'Run_invincible';
+            var hasInvincibleAnim = this.anim.getAnimationState(invincibleAnimName);
+            if (!hasInvincibleAnim) {
+                cc.error('Lack of invincible animation');
+            }
+            animName = invincibleAnimName;
+        }
+        // temp
+        this.anim.stop();
+        this.anim.play(animName);
+    },
+
+    // Invincible 
+    enterInvincible () {
+        this.invincible = true;
+        this._updateAnimation();
+        this.unschedule(this._bindedScheduleFunc);
+        var timeScale = this.invincibleSpeed / this.normalSpeed;
+        // 提高场景内物体的移动速度
+        D.spawnManager.objectSpeed = this.invincibleSpeed;
+        this.scheduleOnce(this._bindedScheduleFunc, this.invincibleTime * timeScale);
+        // 无敌后，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
+        cc.director.getScheduler().setTimeScale(timeScale);
+    },
+
+    exitInvincible () {
+        this.invincible = false;
+        this._updateAnimation();
+        // 还原场景内物体的移动速度
+        D.spawnManager.objectSpeed = this.normalSpeed;
+        // 还原之前的设置，场景运行速度会加快，所以要把 scheduler 的速度也加快，这样才能保证水管的间距不变
+        cc.director.getScheduler().setTimeScale(1.0);
+    },
+
+    //-- 开始跳跃设置状态数据，播放动画
+    jump: function () {
+        if (this._energy >= this.jumpEnergyCost) {
+            this._energy -= this.jumpEnergyCost;
+
+            this.state = State.Jump;
+            this.currentSpeed = this.initJumpSpeed;
+            // play the dust animation
+            if (this.node.y <= this.groundY)
+                this.spawnDust('DustUp');
+            // play audio effect
+            cc.audioEngine.playEffect(this.jumpAudio);
+        }
+        else {
+            cc.audioEngine.playEffect(D.game.dieAudio);
         }
     },
-    //-- 开始跳跃设置状态数据，播放动画
-    _jump: function () {
-        this.state = State.Jump;
-        this.currentSpeed = this.initSpeed;
 
-        //-- 播放跳音效
-        this.jumpAudio.stop();
-        this.jumpAudio.play();
+    spawnDust (animName) {
+        let dustType = 'Dust';
+        let dust = D.spawnManager.spawn(this.dustPrefab, dustType, this.node);
+        dust.node.position = cc.v2(0, -20);
+        dust.playAnim(animName);
     }
 });
-
-Sheep.State = State;
