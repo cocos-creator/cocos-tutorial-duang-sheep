@@ -68,10 +68,17 @@ var Sheep = cc.Class({
         // scene speed
         invincibleSpeed: -600,
         normalSpeed: -300,
-        _energy: 0
+        _energy: 0,
+
+        // temp prop
+        GameManager: cc.Node
     },
+    statics: {
+        State: State
+    },
+
     //-- 初始化
-    onLoad: function () {
+    init: function () {
         this.anim = this.getComponent(cc.Animation);
         this.currentSpeed = 0;
         // listener to touch start 
@@ -106,7 +113,7 @@ var Sheep = cc.Class({
 
     enableInput (enable) {
         if (enable) {
-            this.registeInput();
+            this.registeInput()
         }
         else {
             this.cancelInput();
@@ -124,15 +131,15 @@ var Sheep = cc.Class({
             switch (group) {
                 case 'Obstacle':
                 case 'Driller':
-                    // gameOver
-                    cc.log('Collision');
+                    this.GameManager.getComponent('GameManager').gameOver();
+                    this.state = State.Dead;
+                    this.enableInput(false);
                     break;
                 case 'NextPipe': 
-                    // go through the pipe
-                    cc.log('NextPipe');
+                    this.GameManager.getComponent('GameManager').gainScore();
                     break;
                 case 'Star':
-                    // add score
+                    // invincible
                     break;
                 default: 
                     break;
@@ -159,10 +166,10 @@ var Sheep = cc.Class({
                 if (this.anim.currentClip.name === 'DropEnd' && !this.anim.getAnimationState('DropEnd').isPlaying) {
                     this.state = State.Run;
                 }
-                break
-            case Sheep.State.Dead: 
                 break;
-            default:
+            case Sheep.State.Dead:
+                return;
+            default: 
                 break;
         }
         let flying = this.state === State.Jump || this.node.y > this.groundY;
@@ -180,7 +187,7 @@ var Sheep = cc.Class({
         this.energyBar.progress = this._energy;
     },
 
-    //-- 更新绵羊动画
+    //-- 更新绵羊坐标
     _updateAnimation: function () {
         let animName = State[this._state];
         // temp
@@ -211,8 +218,7 @@ var Sheep = cc.Class({
             cc.audioEngine.playEffect(this.jumpAudio);
         }
         else {
-            // play the refuse audio effect
-            //cc.audioEngine.playEffect(D.game.dieAudio);
+            cc.audioEngine.playEffect(this.GameManager.getComponent('GameManager').dieAudio);
         }
     },
 
@@ -222,5 +228,3 @@ var Sheep = cc.Class({
         dust.playAnim(animName);
     }
 });
-
-Sheep.State = State;

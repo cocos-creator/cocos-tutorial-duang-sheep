@@ -2,11 +2,11 @@ const Sheep = require('./Sheep');
 
 var State = cc.Enum({
     Menu: 1,
-    Playing: 1 << 1,
+    Run: 1 << 1,
     Over: 1 << 2
 });
 
-cc.Class({
+var GameManager = cc.Class({
     extends: cc.Component,
 
     properties: {
@@ -40,7 +40,11 @@ cc.Class({
         supermanMode: {
             default: false,
             tooltip: '无敌模式, 方便测试地图'
-        }
+        },
+
+        // temp prop
+        pipeManager: cc.Node,
+        drillerManager: cc.Node
     },
 
     statics: {
@@ -56,20 +60,34 @@ cc.Class({
         this.score = 0;
         this.scoreText.string = this.score;
         this.gameOverMenu.active = false;
-        // this.sheep.init();
+        this.sheep.init();
     },
 
     start () {
-        this.state = State.Playing;
+        this.state = State.Run;
         this.score = 0;
         // play bgMusic
         cc.audioEngine.playMusic(this.gameBgAudio);
-        // init managers
+
     },
 
     gameOver () {
         // stop the running
         this.state = State.Over;
+        this.pipeManager.getComponent('PipeGroupManager').reset();
+        this.drillerManager.getComponent('DrillerManager').reset();
+        cc.audioEngine.stopMusic();
+        cc.audioEngine.stopEffect(this.dieAudio);
+        cc.audioEngine.stopEffect(this.gameOverAudio);
         this.gameOverMenu.active = true;
+        this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;
+    },
+    // update the score
+    gainScore () {
+        this.score++;
+        this.scoreText.string = this.score;
+        cc.audioEngine.playEffect(this.scoreAudio);
     }
 });
+
+module.export = GameManager;

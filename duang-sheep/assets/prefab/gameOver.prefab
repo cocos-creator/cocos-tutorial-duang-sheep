@@ -23,21 +23,24 @@
         "__id__": 5
       },
       {
-        "__id__": 8
+        "__id__": 10
       },
       {
-        "__id__": 11
+        "__id__": 13
       }
     ],
     "_active": false,
     "_level": 2,
     "_components": [
       {
-        "__id__": 14
+        "__id__": 16
+      },
+      {
+        "__id__": 17
       }
     ],
     "_prefab": {
-      "__id__": 15
+      "__id__": 18
     },
     "_opacity": 255,
     "_color": {
@@ -181,7 +184,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "717a1cb7-f1d4-4c07-9665-eb63818fbc04"
     },
     "fileId": "a3Dh9q8v5IwIQn8dw8y2ZN",
     "sync": false
@@ -199,10 +202,13 @@
     "_components": [
       {
         "__id__": 6
+      },
+      {
+        "__id__": 7
       }
     ],
     "_prefab": {
-      "__id__": 7
+      "__id__": 9
     },
     "_opacity": 255,
     "_color": {
@@ -278,12 +284,90 @@
     "_id": ""
   },
   {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 5
+    },
+    "_enabled": true,
+    "transition": 2,
+    "pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "duration": 0.1,
+    "zoomScale": 1.2,
+    "clickEvents": [
+      {
+        "__id__": 8
+      }
+    ],
+    "_N$interactable": true,
+    "_N$enableAutoGrayEffect": false,
+    "_N$normalColor": {
+      "__type__": "cc.Color",
+      "r": 214,
+      "g": 214,
+      "b": 214,
+      "a": 255
+    },
+    "_N$disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_N$normalSprite": {
+      "__uuid__": "a615ad08-d43d-41e3-b4de-7ee2013b8af1"
+    },
+    "_N$pressedSprite": {
+      "__uuid__": "a615ad08-d43d-41e3-b4de-7ee2013b8af1"
+    },
+    "pressedSprite": {
+      "__uuid__": "a615ad08-d43d-41e3-b4de-7ee2013b8af1"
+    },
+    "_N$hoverSprite": {
+      "__uuid__": "a615ad08-d43d-41e3-b4de-7ee2013b8af1"
+    },
+    "hoverSprite": {
+      "__uuid__": "a615ad08-d43d-41e3-b4de-7ee2013b8af1"
+    },
+    "_N$disabledSprite": {
+      "__uuid__": "a615ad08-d43d-41e3-b4de-7ee2013b8af1"
+    },
+    "_N$target": {
+      "__id__": 5
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "GameOverMenu",
+    "handler": "restart",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "717a1cb7-f1d4-4c07-9665-eb63818fbc04"
     },
     "fileId": "44jGF0SRBCeot9/aazKIBp",
     "sync": false
@@ -300,11 +384,11 @@
     "_level": 3,
     "_components": [
       {
-        "__id__": 9
+        "__id__": 11
       }
     ],
     "_prefab": {
-      "__id__": 10
+      "__id__": 12
     },
     "_opacity": 255,
     "_color": {
@@ -356,7 +440,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 8
+      "__id__": 10
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -384,7 +468,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "717a1cb7-f1d4-4c07-9665-eb63818fbc04"
     },
     "fileId": "bbxsSJQw5B0YjKYlvFarqb",
     "sync": false
@@ -401,11 +485,11 @@
     "_level": 3,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 14
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 15
     },
     "_opacity": 255,
     "_color": {
@@ -457,7 +541,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 11
+      "__id__": 13
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -485,7 +569,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "717a1cb7-f1d4-4c07-9665-eb63818fbc04"
     },
     "fileId": "f8s94mINJHC6NyZ3C+rPeq",
     "sync": false
@@ -519,12 +603,26 @@
     "_id": ""
   },
   {
+    "__type__": "36236h0rlBIIpJs7rwwhaij",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "replay": null,
+    "score": {
+      "__id__": 14
+    },
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "717a1cb7-f1d4-4c07-9665-eb63818fbc04"
     },
     "fileId": "5811ezbCNB/5RCBVfYcpi7",
     "sync": false

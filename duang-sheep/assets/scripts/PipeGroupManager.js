@@ -1,6 +1,7 @@
 const PipeGroup = require("PipeGroup");
+const GameManager = require('GameManager');
 
-cc.Class({
+var PipeGroupManager = cc.Class({
     extends: cc.Component,
 
     properties: {
@@ -10,7 +11,10 @@ cc.Class({
         //-- 记录 pipe 生成位置
         spawnX: 0,
         //-- pipe 移动速度
-        objectSpeed: 0
+        objectSpeed: 0,
+
+        // temp prop
+        gameManager: cc.Node
 
     },
     // this is a temp script content to test the PipeGroup spwan
@@ -29,6 +33,9 @@ cc.Class({
     },
 
     update (dt) {
+        if (this.gameManager.getComponent('GameManager').state !== GameManager.State.Run) {
+            return;
+        }
         var children = this.node.children;
         let distance = dt * this.objectSpeed;
         for (var i = 0; i < children.length; i++) {
@@ -40,5 +47,9 @@ cc.Class({
                 node.destroy();
             }
         }
+    },
+
+    reset () {
+        this.unschedule(this.spawnPipe);
     }
 });
