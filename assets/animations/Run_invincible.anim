@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "invincible",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.5,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "d6a64eb8-a1f9-4d33-8083-636515cfcf83"
+            }
+          },
+          {
+            "frame": 0.125,
+            "value": {
+              "__uuid__": "56e01acc-b40e-4218-be5a-f0c4ba7308d2"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "a30b2e06-9612-4847-bb9b-51676dce9d68"
+            }
+          },
+          {
+            "frame": 0.375,
+            "value": {
+              "__uuid__": "b4da1b62-7d00-4a79-9746-bf15ea5f95f9"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

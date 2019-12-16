@@ -1,9 +1,8 @@
 cc.Class({
-    extends: cc.Component,
+    extends: require('SceneObject'),
     properties: {
-        speed: 0,
-        botYRange: cc.p(0, 0),
-        spacingRange: cc.p(0, 0),
+        botYRange: cc.v2(0, 0),
+        spacingRange: cc.v2(0, 0),
         topPipe: cc.Node,
         botPipe: cc.Node
     },
@@ -13,17 +12,5 @@ cc.Class({
         let topYPos = botYPos + space;
         this.topPipe.y = topYPos;
         this.botPipe.y = botYPos;
-    },
-    update (dt) {
-        if (D.game.state !== D.GameManager.State.Run) {
-            return;
-        }
-
-        this.node.x += this.speed * dt;
-
-        var disappear = this.node.getBoundingBoxToWorld().xMax < 0;
-        if (disappear) {
-            D.pipeManager.despawnPipe(this);
-        }
     }
 });
