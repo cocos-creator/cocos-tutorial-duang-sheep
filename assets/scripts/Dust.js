@@ -1,5 +1,5 @@
 cc.Class({
-    extends: cc.Component,
+    extends: require('SceneObject'),
 
     properties: {
         anim: cc.Animation
@@ -12,11 +12,6 @@ cc.Class({
 
     finish () {
         this.node.removeFromParent();
-        cc.pool.putInPool(this);
+        D.sceneManager.putIntoPool(this);
     }
-
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
 });
