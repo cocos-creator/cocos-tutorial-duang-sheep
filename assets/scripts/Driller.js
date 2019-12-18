@@ -17,6 +17,7 @@ cc.Class({
 
     onEnable () {
         this.node.y = 0;
+        this.node.rotation = 90;
     },
 
     update (dt) {
@@ -26,11 +27,12 @@ cc.Class({
         var expectedDir = targetPos.sub(selfPos).normalizeSelf();
         var selfDir = getDir(this.node);
         var isLeft = selfDir.cross(expectedDir) > 0;
+
         if (isLeft) {
-            this.node.rotation += this.angleVelocity * dt;
+            this.node.rotation -= this.angleVelocity * dt;
         }
         else {
-            this.node.rotation -= this.angleVelocity * dt;
+            this.node.rotation += this.angleVelocity * dt;
         }
 
         // move forward
