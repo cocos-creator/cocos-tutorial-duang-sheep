@@ -1,3 +1,5 @@
+let Dust = require("Dust");
+
 //-- 绵羊状态
 var State = cc.Enum({
     None   : -1,
@@ -7,6 +9,7 @@ var State = cc.Enum({
     DropEnd: -1,
     Dead   : -1
 });
+
 var Sheep = cc.Class({
     //-- 继承
     extends: cc.Component,
@@ -228,9 +231,9 @@ var Sheep = cc.Class({
             cc.audioEngine.playEffect(D.game.dieAudio);
         }
     },
+
     spawnDust (animName) {
-        let dustType = 'Dust';
-        let dust = D.sceneManager.spawn(this.dustPrefab, dustType, this.node);
+        let dust = D.sceneManager.spawn(this.dustPrefab, Dust, this.node);
         dust.node.position = cc.v2(0, 0);
         dust.playAnim(animName);
     }

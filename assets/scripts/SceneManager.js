@@ -18,9 +18,10 @@ cc.Class({
     },
 
     spawn (prefab, compType, parent) {
-        let comp = this._pool.get(compType);
+        let comp = this._pool.get.bind(this)(compType);
         if (!comp) {
             comp = cc.instantiate(prefab).getComponent(compType);
+            console.log('generate new targer');
         }
 
         if (parent) {
@@ -52,6 +53,7 @@ cc.Class({
             node.x += distance;
             var bounds = node.getBoundingBoxToWorld();
             var disappear = bounds.xMax < 0;
+
             if (disappear) {
                 this.despawn(node.getComponent(SceneObject));
             }
@@ -59,18 +61,24 @@ cc.Class({
     },
 
     getCompObj (comp) {
+        let array = [];
+        let obj = null;
         for(let i = 0; i < this._pool.count; i++) {
-            let array = [];
-            let obj = this._pool._get;
+            obj = this._pool._get();
             if (obj instanceof comp) {
-                array.forEach((obj) => {
-                    this._pool.put(obj);
-                });
-                return obj;
+                break;
             }
-            array.push(obj);
+			else  {
+                array.push(obj);
+                obj = null;
+			}
         }
-        return null;
+
+        array.forEach(o => {
+            this._pool.put(o);
+        });
+
+        return obj;
     },
 
     // add to open the pool comp to other module
@@ -78,8 +86,10 @@ cc.Class({
         let oldCount = this._pool.count;
         this._pool.put(value);
         if (oldCount < this._pool.count) {
+            console.log("return back");
             return true;
         }
+
         console.warn('pool has been filled, please resize the array length.')
         return false;
     }
