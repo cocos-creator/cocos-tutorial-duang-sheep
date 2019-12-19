@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "6ea14694-a6ba-401e-a5b8-17a74945ed13",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "sheep_jump_04": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "a2f4476b-5b47-4ab4-8327-9a65b62ce3d8",
       "rawTextureUuid": "6ea14694-a6ba-401e-a5b8-17a74945ed13",
       "trimType": "auto",

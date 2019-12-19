@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "1d01ef87-466d-4e02-9079-137fb299e402",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "flappybird": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "95b92b6d-ab56-4af3-8f2c-815c50fd0d79",
       "rawTextureUuid": "1d01ef87-466d-4e02-9079-137fb299e402",
       "trimType": "auto",
