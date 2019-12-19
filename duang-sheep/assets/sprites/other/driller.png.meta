@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "841a778c-8d6d-42ca-b664-15f4998e5f3b",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "driller": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "0226a093-9ea8-4069-9bf4-161908308933",
       "rawTextureUuid": "841a778c-8d6d-42ca-b664-15f4998e5f3b",
       "trimType": "auto",
